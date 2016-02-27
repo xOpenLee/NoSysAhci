@@ -1,0 +1,225 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+AHCI_BASE	ahci.h	29;"	d
+AHCI_DEV_NULL	ahci.h	21;"	d
+AHCI_DEV_PM	ahci.h	25;"	d
+AHCI_DEV_SATA	ahci.h	22;"	d
+AHCI_DEV_SATAPI	ahci.h	23;"	d
+AHCI_DEV_SEMB	ahci.h	24;"	d
+AHCI_KERN_BASE	ahci.h	40;"	d
+ATA_CMD_READ_DMA_EXT	ahci.h	13;"	d
+ATA_CMD_WRITE_DMA_EXT	ahci.h	14;"	d
+ATA_DEV_BUSY	ahci.h	10;"	d
+ATA_DEV_BUSY	ahci.h	37;"	d
+ATA_DEV_BUSY	ahci.h	7;"	d
+ATA_DEV_DRQ	ahci.h	11;"	d
+ATA_DEV_DRQ	ahci.h	38;"	d
+ATA_DEV_DRQ	ahci.h	8;"	d
+BYTE	ahci.h	/^typedef uint8_t BYTE;$/;"	t
+CC	Makefile	/^CC=gcc$/;"	m
+CFLAGS	Makefile	/^CFLAGS=-c -Wall -g$/;"	m
+DMAbufOffset	ahci.h	/^    DWORD   DMAbufOffset;   \/\/Byte offset into buffer. First 2 bits must be 0$/;"	m	struct:tagFIS_DMA_SETUP
+DMAbufferID	ahci.h	/^    QWORD   DMAbufferID;    \/\/ DMA Buffer Identifier. Used to Identify DMA buffer in host memory. SATA Spec says host specific and not in Spec. Trying AHCI spec might work.$/;"	m	struct:tagFIS_DMA_SETUP
+DWORD	ahci.h	/^typedef uint32_t DWORD;$/;"	t
+EXE	Makefile	/^EXE=ahci$/;"	m
+FIS_DATA	ahci.h	/^} FIS_DATA;$/;"	t	typeref:struct:tagFIS_DATA
+FIS_DMA_SETUP	ahci.h	/^} FIS_DMA_SETUP;$/;"	t	typeref:struct:tagFIS_DMA_SETUP
+FIS_PIO_SETUP	ahci.h	/^} FIS_PIO_SETUP;$/;"	t	typeref:struct:tagFIS_PIO_SETUP
+FIS_REG_D2H	ahci.h	/^} FIS_REG_D2H;$/;"	t	typeref:struct:tagFIS_REG_D2H
+FIS_REG_H2D	ahci.h	/^} FIS_REG_H2D;$/;"	t	typeref:struct:tagFIS_REG_H2D
+FIS_TYPE	ahci.h	/^} FIS_TYPE;$/;"	t	typeref:enum:__anon1
+FIS_TYPE_BIST	ahci.h	/^    FIS_TYPE_BIST       = 0x58, \/\/ BIST activate FIS - bidirectional$/;"	e	enum:__anon1
+FIS_TYPE_DATA	ahci.h	/^    FIS_TYPE_DATA       = 0x46, \/\/ Data FIS - bidirectional$/;"	e	enum:__anon1
+FIS_TYPE_DEV_BITS	ahci.h	/^    FIS_TYPE_DEV_BITS   = 0xA1, \/\/ Set device bits FIS - device to host$/;"	e	enum:__anon1
+FIS_TYPE_DMA_ACT	ahci.h	/^    FIS_TYPE_DMA_ACT    = 0x39, \/\/ DMA activate FIS - device to host$/;"	e	enum:__anon1
+FIS_TYPE_DMA_SETUP	ahci.h	/^    FIS_TYPE_DMA_SETUP  = 0x41, \/\/ DMA setup FIS - bidirectional$/;"	e	enum:__anon1
+FIS_TYPE_PIO_SETUP	ahci.h	/^    FIS_TYPE_PIO_SETUP  = 0x5F, \/\/ PIO setup FIS - device to host$/;"	e	enum:__anon1
+FIS_TYPE_REG_D2H	ahci.h	/^    FIS_TYPE_REG_D2H    = 0x34, \/\/ Register FIS - device to host$/;"	e	enum:__anon1
+FIS_TYPE_REG_H2D	ahci.h	/^    FIS_TYPE_REG_H2D    = 0x27, \/\/ Register FIS - host to device$/;"	e	enum:__anon1
+HBA_CMD_HEADER	ahci.h	/^} HBA_CMD_HEADER;$/;"	t	typeref:struct:tagHBA_CMD_HEADER
+HBA_CMD_TBL	ahci.h	/^} HBA_CMD_TBL;$/;"	t	typeref:struct:tagHBA_CMD_TBL
+HBA_MEM	ahci.h	/^} HBA_MEM;$/;"	t	typeref:struct:tagHBA_MEM
+HBA_PORT	ahci.h	/^} HBA_PORT;$/;"	t	typeref:struct:tagHBA_PORT
+HBA_PORT_DET_PRESENT	ahci.h	27;"	d
+HBA_PORT_IPM_ACTIVE	ahci.h	28;"	d
+HBA_PRDT_ENTRY	ahci.h	/^} HBA_PRDT_ENTRY;$/;"	t	typeref:struct:tagHBA_PRDT_ENTRY
+HBA_PxCMD_CR	ahci.h	31;"	d
+HBA_PxCMD_FR	ahci.h	32;"	d
+HBA_PxCMD_FRE	ahci.h	33;"	d
+HBA_PxCMD_ST	ahci.h	35;"	d
+HBA_PxCMD_SUD	ahci.h	34;"	d
+HBA_PxIS_TFES	ahci.h	12;"	d
+LDFLAGS	Makefile	/^LDFLAGS=$/;"	m
+OBJ	Makefile	/^OBJ=$(SRC:.c=.o)$/;"	m
+QWORD	ahci.h	/^typedef uint64_t QWORD;$/;"	t
+SATA_SIG_ATA	ahci.h	16;"	d
+SATA_SIG_ATAPI	ahci.h	17;"	d
+SATA_SIG_PM	ahci.h	19;"	d
+SATA_SIG_SEMB	ahci.h	18;"	d
+SRC	Makefile	/^SRC=$(EXE).c$/;"	m
+TransferCount	ahci.h	/^    DWORD   TransferCount;  \/\/Number of bytes to transfer. Bit 0 must be 0$/;"	m	struct:tagFIS_DMA_SETUP
+WORD	ahci.h	/^typedef uint16_t WORD;$/;"	t
+a	ahci.h	/^    BYTE    a:1;            \/\/ Auto-activate. Specifies if DMA Activate FIS is needed$/;"	m	struct:tagFIS_DMA_SETUP
+a	ahci.h	/^    BYTE    a:1;        \/\/ ATAPI$/;"	m	struct:tagHBA_CMD_HEADER
+abar	ahci.c	/^HBA_MEM *abar;$/;"	v
+acmd	ahci.h	/^    BYTE    acmd[16];   \/\/ ATAPI command, 12 or 16 bytes$/;"	m	struct:tagHBA_CMD_TBL
+append_disk	ahci.c	/^int append_disk(char* buf, int offset)$/;"	f
+b	ahci.h	/^    BYTE    b:1;        \/\/ BIST$/;"	m	struct:tagHBA_CMD_HEADER
+bohc	ahci.h	/^    DWORD   bohc;       \/\/ 0x28, BIOS\/OS handoff control and status$/;"	m	struct:tagHBA_MEM
+c	ahci.h	/^    BYTE    c:1;        \/\/ 1: Command, 0: Control$/;"	m	struct:tagFIS_REG_H2D
+c	ahci.h	/^    BYTE    c:1;        \/\/ Clear busy upon R_OK$/;"	m	struct:tagHBA_CMD_HEADER
+cap	ahci.h	/^    DWORD   cap;        \/\/ 0x00, Host capability$/;"	m	struct:tagHBA_MEM
+cap2	ahci.h	/^    DWORD   cap2;       \/\/ 0x24, Host capabilities extended$/;"	m	struct:tagHBA_MEM
+ccc_ctl	ahci.h	/^    DWORD   ccc_ctl;    \/\/ 0x14, Command completion coalescing control$/;"	m	struct:tagHBA_MEM
+ccc_pts	ahci.h	/^    DWORD   ccc_pts;    \/\/ 0x18, Command completion coalescing ports$/;"	m	struct:tagHBA_MEM
+cfis	ahci.h	/^    BYTE    cfis[64];   \/\/ Command FIS$/;"	m	struct:tagHBA_CMD_TBL
+cfl	ahci.h	/^    BYTE    cfl:5;      \/\/ Command FIS length in DWORDS, 2 ~ 16$/;"	m	struct:tagHBA_CMD_HEADER
+check_type	ahci.c	/^static int check_type(HBA_PORT *port)$/;"	f	file:
+ci	ahci.h	/^    DWORD   ci;     \/\/ 0x38, command issue$/;"	m	struct:tagHBA_PORT
+clb	ahci.h	/^    DWORD   clb;        \/\/ 0x00, command list base address, 1K-byte aligned$/;"	m	struct:tagHBA_PORT
+clbu	ahci.h	/^    DWORD   clbu;       \/\/ 0x04, command list base address upper 32 bits$/;"	m	struct:tagHBA_PORT
+cmd	ahci.h	/^    DWORD   cmd;        \/\/ 0x18, command and status$/;"	m	struct:tagHBA_PORT
+command	ahci.h	/^    BYTE    command;    \/\/ Command register$/;"	m	struct:tagFIS_REG_H2D
+control	ahci.h	/^    BYTE    control;    \/\/ Control register$/;"	m	struct:tagFIS_REG_H2D
+counth	ahci.h	/^    BYTE    counth;      \/\/ Count register, 15:8$/;"	m	struct:tagFIS_REG_D2H
+counth	ahci.h	/^    BYTE    counth;     \/\/ Count register, 15:8$/;"	m	struct:tagFIS_PIO_SETUP
+counth	ahci.h	/^    BYTE    counth;     \/\/ Count register, 15:8$/;"	m	struct:tagFIS_REG_H2D
+countl	ahci.h	/^    BYTE    countl;      \/\/ Count register, 7:0$/;"	m	struct:tagFIS_REG_D2H
+countl	ahci.h	/^    BYTE    countl;     \/\/ Count register, 7:0$/;"	m	struct:tagFIS_PIO_SETUP
+countl	ahci.h	/^    BYTE    countl;     \/\/ Count register, 7:0$/;"	m	struct:tagFIS_REG_H2D
+ctba	ahci.h	/^    DWORD   ctba;       \/\/ Command table descriptor base address$/;"	m	struct:tagHBA_CMD_HEADER
+ctbau	ahci.h	/^    DWORD   ctbau;      \/\/ Command table descriptor base address upper 32 bits$/;"	m	struct:tagHBA_CMD_HEADER
+d	ahci.h	/^    BYTE    d:1;        \/\/ Data transfer direction, 1 - device to host$/;"	m	struct:tagFIS_DMA_SETUP
+d	ahci.h	/^    BYTE    d:1;        \/\/ Data transfer direction, 1 - device to host$/;"	m	struct:tagFIS_PIO_SETUP
+data	ahci.h	/^    DWORD   data[1];    \/\/ Payload$/;"	m	struct:tagFIS_DATA
+dba	ahci.h	/^    DWORD   dba;        \/\/ Data base address$/;"	m	struct:tagHBA_PRDT_ENTRY
+dbau	ahci.h	/^    DWORD   dbau;       \/\/ Data base address upper 32 bits$/;"	m	struct:tagHBA_PRDT_ENTRY
+dbc	ahci.h	/^    DWORD   dbc:22;     \/\/ Byte count, 4M max$/;"	m	struct:tagHBA_PRDT_ENTRY
+device	ahci.h	/^    BYTE    device;      \/\/ Device register$/;"	m	struct:tagFIS_REG_D2H
+device	ahci.h	/^    BYTE    device;     \/\/ Device register$/;"	m	struct:tagFIS_PIO_SETUP
+device	ahci.h	/^    BYTE    device;     \/\/ Device register$/;"	m	struct:tagFIS_REG_H2D
+e_status	ahci.h	/^    BYTE    e_status;   \/\/ New value of status register$/;"	m	struct:tagFIS_PIO_SETUP
+em_ctl	ahci.h	/^    DWORD   em_ctl;     \/\/ 0x20, Enclosure management control$/;"	m	struct:tagHBA_MEM
+em_loc	ahci.h	/^    DWORD   em_loc;     \/\/ 0x1C, Enclosure management location$/;"	m	struct:tagHBA_MEM
+error	ahci.h	/^    BYTE    error;       \/\/ Error register$/;"	m	struct:tagFIS_REG_D2H
+error	ahci.h	/^    BYTE    error;      \/\/ Error register$/;"	m	struct:tagFIS_PIO_SETUP
+fb	ahci.h	/^    DWORD   fb;     \/\/ 0x08, FIS base address, 256-byte aligned$/;"	m	struct:tagHBA_PORT
+fbs	ahci.h	/^    DWORD   fbs;        \/\/ 0x40, FIS-based switch control$/;"	m	struct:tagHBA_PORT
+fbu	ahci.h	/^    DWORD   fbu;        \/\/ 0x0C, FIS base address upper 32 bits$/;"	m	struct:tagHBA_PORT
+featureh	ahci.h	/^    BYTE    featureh;   \/\/ Feature register, 15:8$/;"	m	struct:tagFIS_REG_H2D
+featurel	ahci.h	/^    BYTE    featurel;   \/\/ Feature register, 7:0$/;"	m	struct:tagFIS_REG_H2D
+find_cmdslot	ahci.c	/^int find_cmdslot(HBA_PORT *port)$/;"	f
+fis_type	ahci.h	/^    BYTE    fis_type;    \/\/ FIS_TYPE_REG_D2H$/;"	m	struct:tagFIS_REG_D2H
+fis_type	ahci.h	/^    BYTE    fis_type;   \/\/ FIS_TYPE_DATA$/;"	m	struct:tagFIS_DATA
+fis_type	ahci.h	/^    BYTE    fis_type;   \/\/ FIS_TYPE_DMA_SETUP$/;"	m	struct:tagFIS_DMA_SETUP
+fis_type	ahci.h	/^    BYTE    fis_type;   \/\/ FIS_TYPE_PIO_SETUP$/;"	m	struct:tagFIS_PIO_SETUP
+fis_type	ahci.h	/^    BYTE    fis_type;   \/\/ FIS_TYPE_REG_H2D$/;"	m	struct:tagFIS_REG_H2D
+fs_buf	ahci.h	/^char fs_buf[1024];$/;"	v
+ghc	ahci.h	/^    DWORD   ghc;        \/\/ 0x04, Global host control$/;"	m	struct:tagHBA_MEM
+i	ahci.h	/^    BYTE    i:1;         \/\/ Interrupt bit$/;"	m	struct:tagFIS_REG_D2H
+i	ahci.h	/^    BYTE    i:1;        \/\/ Interrupt bit$/;"	m	struct:tagFIS_DMA_SETUP
+i	ahci.h	/^    BYTE    i:1;        \/\/ Interrupt bit$/;"	m	struct:tagFIS_PIO_SETUP
+i	ahci.h	/^    DWORD   i:1;        \/\/ Interrupt on completion$/;"	m	struct:tagHBA_PRDT_ENTRY
+icc	ahci.h	/^    BYTE    icc;        \/\/ Isochronous command completion$/;"	m	struct:tagFIS_REG_H2D
+ie	ahci.h	/^    DWORD   ie;     \/\/ 0x14, interrupt enable$/;"	m	struct:tagHBA_PORT
+init_ahci	ahci.c	/^void init_ahci(){$/;"	f
+is	ahci.h	/^    DWORD   is;     \/\/ 0x08, Interrupt status$/;"	m	struct:tagHBA_MEM
+is	ahci.h	/^    DWORD   is;     \/\/ 0x10, interrupt status$/;"	m	struct:tagHBA_PORT
+lba0	ahci.h	/^    BYTE    lba0;        \/\/ LBA low register, 7:0$/;"	m	struct:tagFIS_REG_D2H
+lba0	ahci.h	/^    BYTE    lba0;       \/\/ LBA low register, 7:0$/;"	m	struct:tagFIS_PIO_SETUP
+lba0	ahci.h	/^    BYTE    lba0;       \/\/ LBA low register, 7:0$/;"	m	struct:tagFIS_REG_H2D
+lba1	ahci.h	/^    BYTE    lba1;        \/\/ LBA mid register, 15:8$/;"	m	struct:tagFIS_REG_D2H
+lba1	ahci.h	/^    BYTE    lba1;       \/\/ LBA mid register, 15:8$/;"	m	struct:tagFIS_PIO_SETUP
+lba1	ahci.h	/^    BYTE    lba1;       \/\/ LBA mid register, 15:8$/;"	m	struct:tagFIS_REG_H2D
+lba2	ahci.h	/^    BYTE    lba2;        \/\/ LBA high register, 23:16$/;"	m	struct:tagFIS_REG_D2H
+lba2	ahci.h	/^    BYTE    lba2;       \/\/ LBA high register, 23:16$/;"	m	struct:tagFIS_PIO_SETUP
+lba2	ahci.h	/^    BYTE    lba2;       \/\/ LBA high register, 23:16$/;"	m	struct:tagFIS_REG_H2D
+lba3	ahci.h	/^    BYTE    lba3;        \/\/ LBA register, 31:24$/;"	m	struct:tagFIS_REG_D2H
+lba3	ahci.h	/^    BYTE    lba3;       \/\/ LBA register, 31:24$/;"	m	struct:tagFIS_PIO_SETUP
+lba3	ahci.h	/^    BYTE    lba3;       \/\/ LBA register, 31:24$/;"	m	struct:tagFIS_REG_H2D
+lba4	ahci.h	/^    BYTE    lba4;        \/\/ LBA register, 39:32$/;"	m	struct:tagFIS_REG_D2H
+lba4	ahci.h	/^    BYTE    lba4;       \/\/ LBA register, 39:32$/;"	m	struct:tagFIS_PIO_SETUP
+lba4	ahci.h	/^    BYTE    lba4;       \/\/ LBA register, 39:32$/;"	m	struct:tagFIS_REG_H2D
+lba5	ahci.h	/^    BYTE    lba5;        \/\/ LBA register, 47:40$/;"	m	struct:tagFIS_REG_D2H
+lba5	ahci.h	/^    BYTE    lba5;       \/\/ LBA register, 47:40$/;"	m	struct:tagFIS_PIO_SETUP
+lba5	ahci.h	/^    BYTE    lba5;       \/\/ LBA register, 47:40$/;"	m	struct:tagFIS_REG_H2D
+p	ahci.h	/^    BYTE    p:1;        \/\/ Prefetchable$/;"	m	struct:tagHBA_CMD_HEADER
+pages_for_ahci_end	ahci.c	/^uint64_t *pages_for_ahci_end;$/;"	v
+pages_for_ahci_end_virtual	ahci.c	/^uint64_t *pages_for_ahci_end_virtual;$/;"	v
+pages_for_ahci_start	ahci.c	/^uint64_t *pages_for_ahci_start;$/;"	v
+pages_for_ahci_start_virtual	ahci.c	/^uint64_t *pages_for_ahci_start_virtual;$/;"	v
+pi	ahci.h	/^    DWORD   pi;     \/\/ 0x0C, Port implemented$/;"	m	struct:tagHBA_MEM
+pmp	ahci.h	/^    BYTE    pmp:4;      \/\/ Port multiplier port$/;"	m	struct:tagHBA_CMD_HEADER
+pmport	ahci.h	/^    BYTE    pmport:4;    \/\/ Port multiplier$/;"	m	struct:tagFIS_REG_D2H
+pmport	ahci.h	/^    BYTE    pmport:4;   \/\/ Port multiplier$/;"	m	struct:tagFIS_DATA
+pmport	ahci.h	/^    BYTE    pmport:4;   \/\/ Port multiplier$/;"	m	struct:tagFIS_DMA_SETUP
+pmport	ahci.h	/^    BYTE    pmport:4;   \/\/ Port multiplier$/;"	m	struct:tagFIS_PIO_SETUP
+pmport	ahci.h	/^    BYTE    pmport:4;   \/\/ Port multiplier$/;"	m	struct:tagFIS_REG_H2D
+port_rebase	ahci.c	/^void port_rebase(HBA_PORT *port, int portno){$/;"	f
+ports	ahci.h	/^    HBA_PORT    ports[1];   \/\/ 1 ~ 32$/;"	m	struct:tagHBA_MEM
+prdbc	ahci.h	/^        DWORD   prdbc;      \/\/ Physical region descriptor byte count transferred$/;"	m	struct:tagHBA_CMD_HEADER
+prdt_entry	ahci.h	/^    HBA_PRDT_ENTRY  prdt_entry[1];  \/\/ Physical region descriptor table entries, 0 ~ 65535$/;"	m	struct:tagHBA_CMD_TBL
+prdtl	ahci.h	/^    WORD    prdtl;      \/\/ Physical region descriptor table length in entries$/;"	m	struct:tagHBA_CMD_HEADER
+probe_port	ahci.c	/^void probe_port(HBA_MEM *abar_temp){$/;"	f
+r	ahci.h	/^    BYTE    r:1;        \/\/ Reset$/;"	m	struct:tagHBA_CMD_HEADER
+read_disk	ahci.c	/^char* read_disk(DWORD offset)$/;"	f
+read_interface	ahci.c	/^int read_interface(HBA_PORT *port, DWORD startl, DWORD starth, DWORD count, QWORD buf)$/;"	f
+resvd	ahci.h	/^    DWORD   resvd;          \/\/Reserved$/;"	m	struct:tagFIS_DMA_SETUP
+rsv	ahci.h	/^    BYTE    rsv[0xA0-0x2C];$/;"	m	struct:tagHBA_MEM
+rsv	ahci.h	/^    BYTE    rsv[48];    \/\/ Reserved$/;"	m	struct:tagHBA_CMD_TBL
+rsv0	ahci.h	/^    BYTE    rsv0:1;     \/\/ Reserved$/;"	m	struct:tagFIS_DMA_SETUP
+rsv0	ahci.h	/^    BYTE    rsv0:1;     \/\/ Reserved$/;"	m	struct:tagFIS_PIO_SETUP
+rsv0	ahci.h	/^    BYTE    rsv0:1;     \/\/ Reserved$/;"	m	struct:tagHBA_CMD_HEADER
+rsv0	ahci.h	/^    BYTE    rsv0:2;      \/\/ Reserved$/;"	m	struct:tagFIS_REG_D2H
+rsv0	ahci.h	/^    BYTE    rsv0:3;     \/\/ Reserved$/;"	m	struct:tagFIS_REG_H2D
+rsv0	ahci.h	/^    BYTE    rsv0:4;     \/\/ Reserved$/;"	m	struct:tagFIS_DATA
+rsv0	ahci.h	/^    DWORD   rsv0;       \/\/ 0x1C, Reserved$/;"	m	struct:tagHBA_PORT
+rsv0	ahci.h	/^    DWORD   rsv0;       \/\/ Reserved$/;"	m	struct:tagHBA_PRDT_ENTRY
+rsv1	ahci.h	/^    BYTE    rsv1:1;      \/\/ Reserved$/;"	m	struct:tagFIS_REG_D2H
+rsv1	ahci.h	/^    BYTE    rsv1:1;$/;"	m	struct:tagFIS_PIO_SETUP
+rsv1	ahci.h	/^    BYTE    rsv1[2];    \/\/ Reserved$/;"	m	struct:tagFIS_DATA
+rsv1	ahci.h	/^    BYTE    rsv1[4];    \/\/ Reserved$/;"	m	struct:tagFIS_REG_H2D
+rsv1	ahci.h	/^    DWORD   rsv1:9;     \/\/ Reserved$/;"	m	struct:tagHBA_PRDT_ENTRY
+rsv1	ahci.h	/^    DWORD   rsv1[11];   \/\/ 0x44 ~ 0x6F, Reserved$/;"	m	struct:tagHBA_PORT
+rsv1	ahci.h	/^    DWORD   rsv1[4];    \/\/ Reserved$/;"	m	struct:tagHBA_CMD_HEADER
+rsv2	ahci.h	/^    BYTE    rsv2;        \/\/ Reserved$/;"	m	struct:tagFIS_REG_D2H
+rsv2	ahci.h	/^    BYTE    rsv2;       \/\/ Reserved$/;"	m	struct:tagFIS_PIO_SETUP
+rsv3	ahci.h	/^    BYTE    rsv3;       \/\/ Reserved$/;"	m	struct:tagFIS_PIO_SETUP
+rsv3	ahci.h	/^    BYTE    rsv3[2];     \/\/ Reserved$/;"	m	struct:tagFIS_REG_D2H
+rsv4	ahci.h	/^    BYTE    rsv4[2];    \/\/ Reserved$/;"	m	struct:tagFIS_PIO_SETUP
+rsv4	ahci.h	/^    BYTE    rsv4[4];     \/\/ Reserved$/;"	m	struct:tagFIS_REG_D2H
+rsvd	ahci.h	/^    DWORD   rsvd;           \/\/More reserved$/;"	m	struct:tagFIS_DMA_SETUP
+rsved	ahci.h	/^    BYTE    rsved[2];       \/\/ Reserved$/;"	m	struct:tagFIS_DMA_SETUP
+sact	ahci.h	/^    DWORD   sact;       \/\/ 0x34, SATA active (SCR3:SActive)$/;"	m	struct:tagHBA_PORT
+sctl	ahci.h	/^    DWORD   sctl;       \/\/ 0x2C, SATA control (SCR2:SControl)$/;"	m	struct:tagHBA_PORT
+serr	ahci.h	/^    DWORD   serr;       \/\/ 0x30, SATA error (SCR1:SError)$/;"	m	struct:tagHBA_PORT
+sig	ahci.h	/^    DWORD   sig;        \/\/ 0x24, signature$/;"	m	struct:tagHBA_PORT
+sntf	ahci.h	/^    DWORD   sntf;       \/\/ 0x3C, SATA notification (SCR4:SNotification)$/;"	m	struct:tagHBA_PORT
+ssts	ahci.h	/^    DWORD   ssts;       \/\/ 0x28, SATA status (SCR0:SStatus)$/;"	m	struct:tagHBA_PORT
+start_cmd	ahci.c	/^void start_cmd(HBA_PORT *port)$/;"	f
+status	ahci.h	/^    BYTE    status;      \/\/ Status register$/;"	m	struct:tagFIS_REG_D2H
+status	ahci.h	/^    BYTE    status;     \/\/ Status register$/;"	m	struct:tagFIS_PIO_SETUP
+stop_cmd	ahci.c	/^void stop_cmd(HBA_PORT *port)$/;"	f
+strlen_disk	ahci.c	/^int strlen_disk(char* buf){$/;"	f
+tagFIS_DATA	ahci.h	/^typedef struct tagFIS_DATA$/;"	s
+tagFIS_DMA_SETUP	ahci.h	/^typedef struct tagFIS_DMA_SETUP$/;"	s
+tagFIS_PIO_SETUP	ahci.h	/^typedef struct tagFIS_PIO_SETUP$/;"	s
+tagFIS_REG_D2H	ahci.h	/^typedef struct tagFIS_REG_D2H$/;"	s
+tagFIS_REG_H2D	ahci.h	/^typedef struct tagFIS_REG_H2D$/;"	s
+tagHBA_CMD_HEADER	ahci.h	/^typedef struct tagHBA_CMD_HEADER$/;"	s
+tagHBA_CMD_TBL	ahci.h	/^typedef struct tagHBA_CMD_TBL$/;"	s
+tagHBA_MEM	ahci.h	/^typedef volatile struct tagHBA_MEM$/;"	s
+tagHBA_PORT	ahci.h	/^typedef volatile struct tagHBA_PORT$/;"	s
+tagHBA_PRDT_ENTRY	ahci.h	/^typedef struct tagHBA_PRDT_ENTRY$/;"	s
+tc	ahci.h	/^    WORD    tc;     \/\/ Transfer count$/;"	m	struct:tagFIS_PIO_SETUP
+tfd	ahci.h	/^    DWORD   tfd;        \/\/ 0x20, task file data$/;"	m	struct:tagHBA_PORT
+vendor	ahci.h	/^    BYTE    vendor[0x100-0xA0];$/;"	m	struct:tagHBA_MEM
+vendor	ahci.h	/^    DWORD   vendor[4];  \/\/ 0x70 ~ 0x7F, vendor specific$/;"	m	struct:tagHBA_PORT
+vs	ahci.h	/^    DWORD   vs;     \/\/ 0x10, Version$/;"	m	struct:tagHBA_MEM
+w	ahci.h	/^    BYTE    w:1;        \/\/ Write, 1: H2D, 0: D2H$/;"	m	struct:tagHBA_CMD_HEADER
+write_disk	ahci.c	/^int write_disk(DWORD offset, char* buf)$/;"	f
+write_interface	ahci.c	/^int write_interface(HBA_PORT *port, DWORD startl, DWORD starth, DWORD count, QWORD buf)$/;"	f
