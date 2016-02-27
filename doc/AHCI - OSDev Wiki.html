@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html dir="ltr" class="client-js" lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>AHCI - OSDev Wiki</title>
+<meta charset="UTF-8">
+<meta name="generator" content="MediaWiki 1.18.0">
+<link rel="shortcut icon" href="http://wiki.osdev.org/favicon.ico">
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.osdev.org/api.php?action=rsd">
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="http://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom">
+<link rel="stylesheet" href="AHCI%20-%20OSDev%20Wiki_files/load.css">
+<style type="text/css" media="all">.mw-collapsible-toggle{float:right} li .mw-collapsible-toggle{float:none} .mw-collapsible-toggle-li{list-style:none}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:4250852ed2349a0d4d0fc6509a3e7d4c */
+</style><style type="text/css" media="all">.js-messagebox{margin:1em 5%;padding:0.5em 2.5%;border:1px solid #ccc;background-color:#fcfcfc;font-size:0.8em}.js-messagebox .js-messagebox-group{margin:1px;padding:0.5em 2.5%;border-bottom:1px solid #ddd}.js-messagebox .js-messagebox-group:last-child{border-bottom:thin none transparent}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:8b08bdc91c52a9ffba396dccfb5b473c */
+</style><meta name="ResourceLoaderDynamicStyles" content="">
+<link rel="stylesheet" href="AHCI%20-%20OSDev%20Wiki_files/load_002.css">
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="AHCI%20-%20OSDev%20Wiki_files/load_004.php"></script><script src="AHCI%20-%20OSDev%20Wiki_files/load.php"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "AHCI", "wgTitle": "AHCI", "wgCurRevisionId": 15760, "wgArticleId": 2674, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["ATA"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script><script type="text/javascript" src="AHCI%20-%20OSDev%20Wiki_files/load_002.php"></script>
+<style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "/index.php?title=MediaWiki:Geshi.css&usemsgcache=yes&action=raw&ctype=text/css&smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-AHCI action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div class="js-messagebox" id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">AHCI</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From OSDev Wiki</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="#mw-head">navigation</a>,
+					<a href="#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div dir="ltr" class="mw-content-ltr" lang="en"><table id="toc" class="toc"><tbody><tr><td><div id="toctitle"><h2>Contents</h2><span class="toctoggle">&nbsp;[<a href="#" class="internal" id="togglelink">hide</a>]&nbsp;</span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Introduction"><span class="tocnumber">1</span> <span class="toctext">Introduction</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#SATA_basic"><span class="tocnumber">2</span> <span class="toctext">SATA basic</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Find_an_AHCI_controller"><span class="tocnumber">3</span> <span class="toctext">Find an AHCI controller</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="#Determining_what_mode_the_controller_is_in"><span class="tocnumber">3.1</span> <span class="toctext">Determining what mode the controller is in</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-5"><a href="#AHCI_Registers_and_Memory_Structures"><span class="tocnumber">4</span> <span class="toctext">AHCI Registers and Memory Structures</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="#Detect_attached_SATA_devices"><span class="tocnumber">5</span> <span class="toctext">Detect attached SATA devices</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="#AHCI_port_memory_space_initialization"><span class="tocnumber">6</span> <span class="toctext">AHCI port memory space initialization</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="#AHCI_.26_ATAPI"><span class="tocnumber">7</span> <span class="toctext">AHCI &amp; ATAPI</span></a></li>
+<li class="toclevel-1 tocsection-9"><a href="#Example_-_Read_hard_disk_sectors"><span class="tocnumber">8</span> <span class="toctext">Example - Read hard disk sectors</span></a></li>
+<li class="toclevel-1 tocsection-10"><a href="#External_Links"><span class="tocnumber">9</span> <span class="toctext">External Links</span></a></li>
+</ul>
+</td></tr></tbody></table>
+<h2> <span class="mw-headline" id="Introduction"> Introduction </span></h2>
+<p>AHCI (Advance Host Controller Interface) is developed by Intel to 
+facilitate handling SATA devices. The AHCI specification emphasizes that
+ an AHCI controller (referred to as host bus adapter, or HBA) is 
+designed to be a data movement engine between system memory and SATA 
+devices. It encapsulates SATA devices and provides a standard PCI 
+interface to the host. System designers can easily access SATA drives 
+using system memory and memory mapped registers, without the need for 
+manipulating the annoying task files as IDE do.
+</p><p>An AHCI controller may support up to 32 ports which can attach 
+different SATA devices such as disk drives, port multipliers, or an 
+enclosure management bridge. AHCI supports all native SATA features such
+ as command queueing, hot plugging, power management, etc. To a software
+ developer, an AHCI controller is just a PCI device with bus master 
+capability.
+</p><p>AHCI is a new standard compared to IDE, which has been around for
+ twenty years. There exists little documentation about its programming 
+tips and tricks. Possibly the only available resource is the Intel AHCI 
+specification (see <a href="#External_Links">External Links</a>) and 
+some open source operating systems such as Linux. This article shows the
+ minimal steps an OS (not BIOS) should do to put AHCI controller into a 
+workable state, how to identify drives attached, and how to read 
+physical sectors from a SATA disk. To keep concise, many technical 
+details and deep explanations of some data structures have been omitted.
+</p><p>It should be noted that IDE also supports SATA devices and there 
+are still debates about which one, IDE or AHCI, is better. Some tests 
+even show that a SATA disk acts better in IDE mode than AHCI mode. But 
+the common idea is that AHCI performs better and will be the standard PC
+ to SATA interface, though some driver software should be enhanced to 
+fully cultivate AHCI capability.
+</p><p>All the diagrams in this article are copied from the Intel AHCI specification 1.3.
+</p>
+<h2> <span class="mw-headline" id="SATA_basic"> SATA basic </span></h2>
+<p>There are at least two SATA standards maintained respectively by <a rel="nofollow" class="external text" href="http://www.t13.org/">T13</a> and <a rel="nofollow" class="external text" href="http://www.sata-io.org/">SATA-IO</a>. The SATA-IO focuses on serial ATA and T13 encompasses traditional parallel ATA specifications as well.
+</p><p>To a software developer, the biggest difference between SATA and 
+parallel ATA is that SATA uses FIS (Frame Information Structure) packet 
+to transport data between host and device, though at hardware level they
+ differ much. An FIS can be viewed as a data set of traditional task 
+files, or an encapsulation of ATA commands. SATA uses the same command 
+set as parallel ATA.
+</p><p><b>1) FIS types</b>
+</p><p>Following code defines different kinds of FIS specified in Serial ATA Revision 3.0.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">typedef</span> <span class="kw2">enum</span>
+<span class="br0">{</span>
+	FIS_TYPE_REG_H2D	<span class="sy0">=</span> <span class="nu12">0x27</span><span class="sy0">,</span>	<span class="co1">// Register FIS - host to device</span>
+	FIS_TYPE_REG_D2H	<span class="sy0">=</span> <span class="nu12">0x34</span><span class="sy0">,</span>	<span class="co1">// Register FIS - device to host</span>
+	FIS_TYPE_DMA_ACT	<span class="sy0">=</span> <span class="nu12">0x39</span><span class="sy0">,</span>	<span class="co1">// DMA activate FIS - device to host</span>
+	FIS_TYPE_DMA_SETUP	<span class="sy0">=</span> <span class="nu12">0x41</span><span class="sy0">,</span>	<span class="co1">// DMA setup FIS - bidirectional</span>
+	FIS_TYPE_DATA		<span class="sy0">=</span> <span class="nu12">0x46</span><span class="sy0">,</span>	<span class="co1">// Data FIS - bidirectional</span>
+	FIS_TYPE_BIST		<span class="sy0">=</span> <span class="nu12">0x58</span><span class="sy0">,</span>	<span class="co1">// BIST activate FIS - bidirectional</span>
+	FIS_TYPE_PIO_SETUP	<span class="sy0">=</span> <span class="nu12">0x5F</span><span class="sy0">,</span>	<span class="co1">// PIO setup FIS - device to host</span>
+	FIS_TYPE_DEV_BITS	<span class="sy0">=</span> <span class="nu12">0xA1</span><span class="sy0">,</span>	<span class="co1">// Set device bits FIS - device to host</span>
+<span class="br0">}</span> FIS_TYPE<span class="sy0">;</span></pre></div></div>
+<p><b>2) Register FIS – Host to Device</b>
+</p><p>A host to device register FIS is used by the host to send command
+ or control to a device. As illustrated in the following data structure,
+ it contains the IDE registers such as command, LBA, device, feature, 
+count and control. An ATA command is constructed in this structure and 
+issued to the device. All reserved fields in an FIS should be cleared to
+ zero.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">typedef</span> <span class="kw4">struct</span> tagFIS_REG_H2D
+<span class="br0">{</span>
+	<span class="co1">// DWORD 0</span>
+	BYTE	fis_type<span class="sy0">;</span>	<span class="co1">// FIS_TYPE_REG_H2D</span>
+&nbsp;
+	BYTE	pmport<span class="sy0">:</span><span class="nu0">4</span><span class="sy0">;</span>	<span class="co1">// Port multiplier</span>
+	BYTE	rsv0<span class="sy0">:</span><span class="nu0">3</span><span class="sy0">;</span>		<span class="co1">// Reserved</span>
+	BYTE	c<span class="sy0">:</span><span class="nu0">1</span><span class="sy0">;</span>		<span class="co1">// 1: Command, 0: Control</span>
+&nbsp;
+	BYTE	command<span class="sy0">;</span>	<span class="co1">// Command register</span>
+	BYTE	featurel<span class="sy0">;</span>	<span class="co1">// Feature register, 7:0</span>
+&nbsp;
+	<span class="co1">// DWORD 1</span>
+	BYTE	lba0<span class="sy0">;</span>		<span class="co1">// LBA low register, 7:0</span>
+	BYTE	lba1<span class="sy0">;</span>		<span class="co1">// LBA mid register, 15:8</span>
+	BYTE	lba2<span class="sy0">;</span>		<span class="co1">// LBA high register, 23:16</span>
+	BYTE	device<span class="sy0">;</span>		<span class="co1">// Device register</span>
+&nbsp;
+	<span class="co1">// DWORD 2</span>
+	BYTE	lba3<span class="sy0">;</span>		<span class="co1">// LBA register, 31:24</span>
+	BYTE	lba4<span class="sy0">;</span>		<span class="co1">// LBA register, 39:32</span>
+	BYTE	lba5<span class="sy0">;</span>		<span class="co1">// LBA register, 47:40</span>
+	BYTE	featureh<span class="sy0">;</span>	<span class="co1">// Feature register, 15:8</span>
+&nbsp;
+	<span class="co1">// DWORD 3</span>
+	BYTE	countl<span class="sy0">;</span>		<span class="co1">// Count register, 7:0</span>
+	BYTE	counth<span class="sy0">;</span>		<span class="co1">// Count register, 15:8</span>
+	BYTE	icc<span class="sy0">;</span>		<span class="co1">// Isochronous command completion</span>
+	BYTE	control<span class="sy0">;</span>	<span class="co1">// Control register</span>
+&nbsp;
+	<span class="co1">// DWORD 4</span>
+	BYTE	rsv1<span class="br0">[</span><span class="nu0">4</span><span class="br0">]</span><span class="sy0">;</span>	<span class="co1">// Reserved</span>
+<span class="br0">}</span> FIS_REG_H2D<span class="sy0">;</span></pre></div></div>
+<p><b>3) Register FIS – Device to Host</b>
+</p><p>A device to host register FIS is used by the device to notify the
+ host that some ATA register has changed. It contains the updated task 
+files such as status, error and other registers.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">typedef</span> <span class="kw4">struct</span> tagFIS_REG_D2H
+<span class="br0">{</span>
+	<span class="co1">// DWORD 0</span>
+	BYTE	fis_type<span class="sy0">;</span>    <span class="co1">// FIS_TYPE_REG_D2H</span>
+&nbsp;
+	BYTE	pmport<span class="sy0">:</span><span class="nu0">4</span><span class="sy0">;</span>    <span class="co1">// Port multiplier</span>
+	BYTE	rsv0<span class="sy0">:</span><span class="nu0">2</span><span class="sy0">;</span>      <span class="co1">// Reserved</span>
+	BYTE	i<span class="sy0">:</span><span class="nu0">1</span><span class="sy0">;</span>         <span class="co1">// Interrupt bit</span>
+	BYTE	rsv1<span class="sy0">:</span><span class="nu0">1</span><span class="sy0">;</span>      <span class="co1">// Reserved</span>
+&nbsp;
+	BYTE	status<span class="sy0">;</span>      <span class="co1">// Status register</span>
+	BYTE	error<span class="sy0">;</span>       <span class="co1">// Error register</span>
+&nbsp;
+	<span class="co1">// DWORD 1</span>
+	BYTE	lba0<span class="sy0">;</span>        <span class="co1">// LBA low register, 7:0</span>
+	BYTE	lba1<span class="sy0">;</span>        <span class="co1">// LBA mid register, 15:8</span>
+	BYTE	lba2<span class="sy0">;</span>        <span class="co1">// LBA high register, 23:16</span>
+	BYTE	device<span class="sy0">;</span>      <span class="co1">// Device register</span>
+&nbsp;
+	<span class="co1">// DWORD 2</span>
+	BYTE	lba3<span class="sy0">;</span>        <span class="co1">// LBA register, 31:24</span>
+	BYTE	lba4<span class="sy0">;</span>        <span class="co1">// LBA register, 39:32</span>
+	BYTE	lba5<span class="sy0">;</span>        <span class="co1">// LBA register, 47:40</span>
+	BYTE	rsv2<span class="sy0">;</span>        <span class="co1">// Reserved</span>
+&nbsp;
+	<span class="co1">// DWORD 3</span>
+	BYTE	countl<span class="sy0">;</span>      <span class="co1">// Count register, 7:0</span>
+	BYTE	counth<span class="sy0">;</span>      <span class="co1">// Count register, 15:8</span>
+	BYTE	rsv3<span class="br0">[</span><span class="nu0">2</span><span class="br0">]</span><span class="sy0">;</span>     <span class="co1">// Reserved</span>
+&nbsp;
+	<span class="co1">// DWORD 4</span>
+	BYTE	rsv4<span class="br0">[</span><span class="nu0">4</span><span class="br0">]</span><span class="sy0">;</span>     <span class="co1">// Reserved</span>
+<span class="br0">}</span> FIS_REG_D2H<span class="sy0">;</span></pre></div></div>
+<p><b>4) Data FIS – Bidirectional</b>
+</p><p>This FIS is used by the host or device to send data payload. The data size can be varied.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">typedef</span> <span class="kw4">struct</span> tagFIS_DATA
+<span class="br0">{</span>
+	<span class="co1">// DWORD 0</span>
+	BYTE	fis_type<span class="sy0">;</span>	<span class="co1">// FIS_TYPE_DATA</span>
+&nbsp;
+	BYTE	pmport<span class="sy0">:</span><span class="nu0">4</span><span class="sy0">;</span>	<span class="co1">// Port multiplier</span>
+	BYTE	rsv0<span class="sy0">:</span><span class="nu0">4</span><span class="sy0">;</span>		<span class="co1">// Reserved</span>
+&nbsp;
+	BYTE	rsv1<span class="br0">[</span><span class="nu0">2</span><span class="br0">]</span><span class="sy0">;</span>	<span class="co1">// Reserved</span>
+&nbsp;
+	<span class="co1">// DWORD 1 ~ N</span>
+	DWORD	data<span class="br0">[</span><span class="nu0">1</span><span class="br0">]</span><span class="sy0">;</span>	<span class="co1">// Payload</span>
+<span class="br0">}</span> FIS_DATA<span class="sy0">;</span></pre></div></div>
+<p><b>5) PIO Setup – Device to Host</b>
+</p><p>This FIS is used by the device to tell the host that it’s about to send or ready to receive a PIO data payload.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">typedef</span> <span class="kw4">struct</span> tagFIS_PIO_SETUP
+<span class="br0">{</span>
+	<span class="co1">// DWORD 0</span>
+	BYTE	fis_type<span class="sy0">;</span>	<span class="co1">// FIS_TYPE_PIO_SETUP</span>
+&nbsp;
+	BYTE	pmport<span class="sy0">:</span><span class="nu0">4</span><span class="sy0">;</span>	<span class="co1">// Port multiplier</span>
+	BYTE	rsv0<span class="sy0">:</span><span class="nu0">1</span><span class="sy0">;</span>		<span class="co1">// Reserved</span>
+	BYTE	d<span class="sy0">:</span><span class="nu0">1</span><span class="sy0">;</span>		<span class="co1">// Data transfer direction, 1 - device to host</span>
+	BYTE	i<span class="sy0">:</span><span class="nu0">1</span><span class="sy0">;</span>		<span class="co1">// Interrupt bit</span>
+	BYTE	rsv1<span class="sy0">:</span><span class="nu0">1</span><span class="sy0">;</span>
+&nbsp;
+	BYTE	status<span class="sy0">;</span>		<span class="co1">// Status register</span>
+	BYTE	error<span class="sy0">;</span>		<span class="co1">// Error register</span>
+&nbsp;
+	<span class="co1">// DWORD 1</span>
+	BYTE	lba0<span class="sy0">;</span>		<span class="co1">// LBA low register, 7:0</span>
+	BYTE	lba1<span class="sy0">;</span>		<span class="co1">// LBA mid register, 15:8</span>
+	BYTE	lba2<span class="sy0">;</span>		<span class="co1">// LBA high register, 23:16</span>
+	BYTE	device<span class="sy0">;</span>		<span class="co1">// Device register</span>
+&nbsp;
+	<span class="co1">// DWORD 2</span>
+	BYTE	lba3<span class="sy0">;</span>		<span class="co1">// LBA register, 31:24</span>
+	BYTE	lba4<span class="sy0">;</span>		<span class="co1">// LBA register, 39:32</span>
+	BYTE	lba5<span class="sy0">;</span>		<span class="co1">// LBA register, 47:40</span>
+	BYTE	rsv2<span class="sy0">;</span>		<span class="co1">// Reserved</span>
+&nbsp;
+	<span class="co1">// DWORD 3</span>
+	BYTE	countl<span class="sy0">;</span>		<span class="co1">// Count register, 7:0</span>
+	BYTE	counth<span class="sy0">;</span>		<span class="co1">// Count register, 15:8</span>
+	BYTE	rsv3<span class="sy0">;</span>		<span class="co1">// Reserved</span>
+	BYTE	e_status<span class="sy0">;</span>	<span class="co1">// New value of status register</span>
+&nbsp;
+	<span class="co1">// DWORD 4</span>
+	WORD	tc<span class="sy0">;</span>		<span class="co1">// Transfer count</span>
+	BYTE	rsv4<span class="br0">[</span><span class="nu0">2</span><span class="br0">]</span><span class="sy0">;</span>	<span class="co1">// Reserved</span>
+<span class="br0">}</span> FIS_PIO_SETUP<span class="sy0">;</span></pre></div></div>
+<p><b>5) DMA Setup – Device to Host</b>
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">typedef</span> <span class="kw4">struct</span> tagFIS_DMA_SETUP
+<span class="br0">{</span>
+	<span class="co1">// DWORD 0</span>
+	BYTE	fis_type<span class="sy0">;</span>	<span class="co1">// FIS_TYPE_DMA_SETUP</span>
+&nbsp;
+	BYTE	pmport<span class="sy0">:</span><span class="nu0">4</span><span class="sy0">;</span>	<span class="co1">// Port multiplier</span>
+	BYTE	rsv0<span class="sy0">:</span><span class="nu0">1</span><span class="sy0">;</span>		<span class="co1">// Reserved</span>
+	BYTE	d<span class="sy0">:</span><span class="nu0">1</span><span class="sy0">;</span>		<span class="co1">// Data transfer direction, 1 - device to host</span>
+	BYTE	i<span class="sy0">:</span><span class="nu0">1</span><span class="sy0">;</span>		<span class="co1">// Interrupt bit</span>
+	BYTE	a<span class="sy0">:</span><span class="nu0">1</span><span class="sy0">;</span>            <span class="co1">// Auto-activate. Specifies if DMA Activate FIS is needed</span>
+&nbsp;
+        BYTE    rsved<span class="br0">[</span><span class="nu0">2</span><span class="br0">]</span><span class="sy0">;</span>       <span class="co1">// Reserved</span>
+&nbsp;
+	<span class="co1">//DWORD 1&amp;2</span>
+&nbsp;
+        QWORD   DMAbufferID<span class="sy0">;</span>    <span class="co1">// DMA Buffer Identifier. Used to Identify DMA buffer in host memory. SATA Spec says host specific and not in Spec. Trying AHCI spec might work.</span>
+&nbsp;
+        <span class="co1">//DWORD 3</span>
+        DWORD   rsvd<span class="sy0">;</span>           <span class="co1">//More reserved</span>
+&nbsp;
+        <span class="co1">//DWORD 4</span>
+        DWORD   DMAbufOffset<span class="sy0">;</span>   <span class="co1">//Byte offset into buffer. First 2 bits must be 0</span>
+&nbsp;
+        <span class="co1">//DWORD 5</span>
+        DWORD   TransferCount<span class="sy0">;</span>  <span class="co1">//Number of bytes to transfer. Bit 0 must be 0</span>
+&nbsp;
+        <span class="co1">//DWORD 6</span>
+        DWORD   resvd<span class="sy0">;</span>          <span class="co1">//Reserved</span>
+&nbsp;
+<span class="br0">}</span> FIS_DMA_SETUP<span class="sy0">;</span></pre></div></div>
+<p><b>7) Example</b>
+</p><p>This example illustrates the steps to read the Identify data from a device. Error detection and recovery is ignored.
+</p><p>To issue an ATA Identify command to the device, the FIS is constructed at follows.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1">FIS_REG_H2D fis<span class="sy0">;</span>
+<span class="kw3">memset</span><span class="br0">(</span><span class="sy0">&amp;</span>fis<span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="kw4">sizeof</span><span class="br0">(</span>FIS_REG_H2D<span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span>
+fis<span class="sy0">-&gt;</span>fis_type <span class="sy0">=</span> FIS_TYPE_REG_H2D<span class="sy0">;</span>
+fis<span class="sy0">-&gt;</span>command <span class="sy0">=</span> ATA_CMD_IDENTIFY<span class="sy0">;</span>	<span class="co1">// 0xEC</span>
+fis<span class="sy0">-&gt;</span>device <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>			<span class="co1">// Master device</span>
+fis<span class="sy0">-&gt;</span>c <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>				<span class="co1">// Write command register</span></pre></div></div>
+<p>After the device receives this FIS and successfully read the 256 
+words data into its internal buffer, it sends a PIO Setup FIS – Device 
+to Host to tell the host that it’s ready to transfer data and the data 
+size (FIS_PIO_SETUP.tc).
+</p><p>After the PIO Setup FIS – Device to Host has been sent correctly,
+ the device sends a DATA FIS to the host which contains the received 
+data payload (FIS_DATA.data).
+</p><p>This scenario is described in SATA revision 3.0 as a PIO data-in 
+command protocol. But an AHCI controller will do the latter two steps 
+for the host. The host software needs only setup and issue the command 
+FIS, and tells the AHCI controller the memory address and size to store 
+the received data. After everything is done, the AHCI controller will 
+issue an interrupt (if enabled) to notify the host to check the data.
+</p>
+<h2> <span class="mw-headline" id="Find_an_AHCI_controller"> Find an AHCI controller </span></h2>
+<p>An AHCI controller can be found by enumerating the PCI bus. It has a 
+class id 0x01 (mass storage device) and normally a subclass id 0x06 
+(serial ATA). The vendor id and device id should also be checked to 
+ensure it’s really an AHCI controller.
+</p>
+<h3> <span class="mw-headline" id="Determining_what_mode_the_controller_is_in"> Determining what mode the controller is in </span></h3>
+<p>As you may be aware, a SATA controller can either be in IDE emulation
+ mode or in AHCI mode. The problem that enters here is simple: <br>
+<b>How to find what mode the controller is in</b>. The documentation is 
+really obscure on this. Perhaps the best way is to initialize a SATA 
+controller as both IDE and AHCI. In this way, as long as you are careful
+ about non-existent ports, you cannot go wrong. 
+</p>
+<h2> <span class="mw-headline" id="AHCI_Registers_and_Memory_Structures"> AHCI Registers and Memory Structures </span></h2>
+<p>As mentioned above, host communicates with the AHCI controller 
+through system memory and memory mapped registers. The last PCI base 
+address register (BAR[5], header offset 0x24) points to the AHCI base 
+memory, it’s called ABAR (AHCI Base Memory Register). All AHCI registers
+ and memories can be located through ABAR. The other PCI base address 
+registers act same as a traditional IDE controller. Some AHCI controller
+ can be configured to simulate a legacy IDE one.
+</p><p><b>1) HBA memory registers</b>
+</p><p>An AHCI controller can support up to 32 ports. HBA memory 
+registers can be divided into two parts: Generic Host Control registers 
+and Port Control registers. Generic Host Control registers controls the 
+behavior of the whole controller, while each port owns its own set of 
+Port Control registers. The actual ports an AHCI controller supported 
+and implemented can be calculated from the Capacity register 
+(HBA_MEM.cap) and the Port Implemented register (HBA_MEM.pi).
+</p><p><a href="http://wiki.osdev.org/File:HBA_registers.jpg" class="image"><img alt="HBA registers.jpg" src="AHCI%20-%20OSDev%20Wiki_files/HBA_registers.jpg" height="623" width="762"></a>
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">typedef</span> <span class="kw4">volatile</span> <span class="kw4">struct</span> tagHBA_MEM
+<span class="br0">{</span>
+	<span class="co1">// 0x00 - 0x2B, Generic Host Control</span>
+	DWORD	cap<span class="sy0">;</span>		<span class="co1">// 0x00, Host capability</span>
+	DWORD	ghc<span class="sy0">;</span>		<span class="co1">// 0x04, Global host control</span>
+	DWORD	is<span class="sy0">;</span>		<span class="co1">// 0x08, Interrupt status</span>
+	DWORD	pi<span class="sy0">;</span>		<span class="co1">// 0x0C, Port implemented</span>
+	DWORD	vs<span class="sy0">;</span>		<span class="co1">// 0x10, Version</span>
+	DWORD	ccc_ctl<span class="sy0">;</span>	<span class="co1">// 0x14, Command completion coalescing control</span>
+	DWORD	ccc_pts<span class="sy0">;</span>	<span class="co1">// 0x18, Command completion coalescing ports</span>
+	DWORD	em_loc<span class="sy0">;</span>		<span class="co1">// 0x1C, Enclosure management location</span>
+	DWORD	em_ctl<span class="sy0">;</span>		<span class="co1">// 0x20, Enclosure management control</span>
+	DWORD	cap2<span class="sy0">;</span>		<span class="co1">// 0x24, Host capabilities extended</span>
+	DWORD	bohc<span class="sy0">;</span>		<span class="co1">// 0x28, BIOS/OS handoff control and status</span>
+&nbsp;
+	<span class="co1">// 0x2C - 0x9F, Reserved</span>
+	BYTE	rsv<span class="br0">[</span><span class="nu12">0xA0</span><span class="sy0">-</span><span class="nu12">0x2C</span><span class="br0">]</span><span class="sy0">;</span>
+&nbsp;
+	<span class="co1">// 0xA0 - 0xFF, Vendor specific registers</span>
+	BYTE	vendor<span class="br0">[</span><span class="nu12">0x100</span><span class="sy0">-</span><span class="nu12">0xA0</span><span class="br0">]</span><span class="sy0">;</span>
+&nbsp;
+	<span class="co1">// 0x100 - 0x10FF, Port control registers</span>
+	HBA_PORT	ports<span class="br0">[</span><span class="nu0">1</span><span class="br0">]</span><span class="sy0">;</span>	<span class="co1">// 1 ~ 32</span>
+<span class="br0">}</span> HBA_MEM<span class="sy0">;</span>
+&nbsp;
+<span class="kw4">typedef</span> <span class="kw4">volatile</span> <span class="kw4">struct</span> tagHBA_PORT
+<span class="br0">{</span>
+	DWORD	clb<span class="sy0">;</span>		<span class="co1">// 0x00, command list base address, 1K-byte aligned</span>
+	DWORD	clbu<span class="sy0">;</span>		<span class="co1">// 0x04, command list base address upper 32 bits</span>
+	DWORD	fb<span class="sy0">;</span>		<span class="co1">// 0x08, FIS base address, 256-byte aligned</span>
+	DWORD	fbu<span class="sy0">;</span>		<span class="co1">// 0x0C, FIS base address upper 32 bits</span>
+	DWORD	is<span class="sy0">;</span>		<span class="co1">// 0x10, interrupt status</span>
+	DWORD	ie<span class="sy0">;</span>		<span class="co1">// 0x14, interrupt enable</span>
+	DWORD	cmd<span class="sy0">;</span>		<span class="co1">// 0x18, command and status</span>
+	DWORD	rsv0<span class="sy0">;</span>		<span class="co1">// 0x1C, Reserved</span>
+	DWORD	tfd<span class="sy0">;</span>		<span class="co1">// 0x20, task file data</span>
+	DWORD	sig<span class="sy0">;</span>		<span class="co1">// 0x24, signature</span>
+	DWORD	ssts<span class="sy0">;</span>		<span class="co1">// 0x28, SATA status (SCR0:SStatus)</span>
+	DWORD	sctl<span class="sy0">;</span>		<span class="co1">// 0x2C, SATA control (SCR2:SControl)</span>
+	DWORD	serr<span class="sy0">;</span>		<span class="co1">// 0x30, SATA error (SCR1:SError)</span>
+	DWORD	sact<span class="sy0">;</span>		<span class="co1">// 0x34, SATA active (SCR3:SActive)</span>
+	DWORD	ci<span class="sy0">;</span>		<span class="co1">// 0x38, command issue</span>
+	DWORD	sntf<span class="sy0">;</span>		<span class="co1">// 0x3C, SATA notification (SCR4:SNotification)</span>
+	DWORD	fbs<span class="sy0">;</span>		<span class="co1">// 0x40, FIS-based switch control</span>
+	DWORD	rsv1<span class="br0">[</span><span class="nu0">11</span><span class="br0">]</span><span class="sy0">;</span>	<span class="co1">// 0x44 ~ 0x6F, Reserved</span>
+	DWORD	vendor<span class="br0">[</span><span class="nu0">4</span><span class="br0">]</span><span class="sy0">;</span>	<span class="co1">// 0x70 ~ 0x7F, vendor specific</span>
+<span class="br0">}</span> HBA_PORT<span class="sy0">;</span></pre></div></div>
+<p>This memory area should be configured as uncacheable as they are 
+memory mapped hardware registers, not normal prefetchable RAM. For the 
+same reason, the data structures are declared as "volatile" to prevent 
+the compiler from over optimizing the code.
+</p><p><b>2) Port Received FIS and Command List Memory</b>
+</p><p>Each port can attach a single SATA device. Host sends commands to
+ the device using Command List and device delivers information to the 
+host using Received FIS structure. They are located at 
+HBA_PORT.clb/clbu, and HBA_PORT.fb/fbu. The most important part of AHCI 
+initialization is to set correctly these two pointers and the data 
+structures they point to.
+</p><p><a href="http://wiki.osdev.org/File:Port_memory.jpg" class="image"><img alt="Port memory.jpg" src="AHCI%20-%20OSDev%20Wiki_files/Port_memory.jpg" height="640" width="876"></a>
+</p><p><b>3) Received FIS</b>
+</p><p>There are four kinds of FIS which may be sent to the host by the 
+device as indicated in the following structure declaration. When an FIS 
+has been copied into the host specified memory, an according bit will be
+ set in the Port Interrupt Status register (HBA_PORT.is). 
+</p><p>Data FIS – Device to Host is not copied to this structure. Data 
+payload is sent and received through PRDT (Physical Region Descriptor 
+Table) in Command List, as will be introduced later.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">typedef</span> <span class="kw4">volatile</span> <span class="kw4">struct</span> tagHBA_FIS
+<span class="br0">{</span>
+	<span class="co1">// 0x00</span>
+	FIS_DMA_SETUP	dsfis<span class="sy0">;</span>		<span class="co1">// DMA Setup FIS</span>
+	BYTE		pad0<span class="br0">[</span><span class="nu0">4</span><span class="br0">]</span><span class="sy0">;</span>
+&nbsp;
+	<span class="co1">// 0x20</span>
+	FIS_PIO_SETUP	psfis<span class="sy0">;</span>		<span class="co1">// PIO Setup FIS</span>
+	BYTE		pad1<span class="br0">[</span><span class="nu0">12</span><span class="br0">]</span><span class="sy0">;</span>
+&nbsp;
+	<span class="co1">// 0x40</span>
+	FIS_REG_D2H	rfis<span class="sy0">;</span>		<span class="co1">// Register – Device to Host FIS</span>
+	BYTE		pad2<span class="br0">[</span><span class="nu0">4</span><span class="br0">]</span><span class="sy0">;</span>
+&nbsp;
+	<span class="co1">// 0x58</span>
+	FIS_DEV_BITS	sdbfis<span class="sy0">;</span>		<span class="co1">// Set Device Bit FIS</span>
+&nbsp;
+	<span class="co1">// 0x60</span>
+	BYTE		ufis<span class="br0">[</span><span class="nu0">64</span><span class="br0">]</span><span class="sy0">;</span>
+&nbsp;
+	<span class="co1">// 0xA0</span>
+	BYTE		rsv<span class="br0">[</span><span class="nu12">0x100</span><span class="sy0">-</span><span class="nu12">0xA0</span><span class="br0">]</span><span class="sy0">;</span>
+<span class="br0">}</span> HBA_FIS<span class="sy0">;</span></pre></div></div>
+<p><b>4) Command List</b>
+</p><p>Host sends commands to the device through Command List. Command 
+List consists of 1 to 32 command headers, each one is called a slot. 
+Each command header describes an ATA or ATAPI command, including a 
+Command FIS, an ATAPI command buffer and a bunch of Physical Region 
+Descriptor Tables specifying the data payload address and size.
+</p><p>To send a command, the host constructs a command header, and set 
+the according bit in the Port Command Issue register (HBA_PORT.ci). The 
+AHCI controller will automatically send the command to the device and 
+wait for response. If there are some errors, error bits in the Port 
+Interrupt register (HBA_PORT.is) will be set and additional information 
+can be retrieved from the Port Task File register (HBA_PORT.tfd), 
+SStatus register (HBA_PORT.ssts) and SError register (HBA_PORT.serr). If
+ it succeeds, the Command Issue register bit will be cleared and the 
+received data payload, if any, will be copied from the device to the 
+host memory by the AHCI controller.
+</p><p>How many slots a Command List holds can be got from the Host 
+capability register (HBA_MEM.cap). It must be within 1 and 32. SATA 
+supports queued commands to increase throughput. Unlike traditional 
+parallel ATA drive; a SATA drive can process a new command when an old 
+one is still running. With AHCI, a host can send up to 32 commands to 
+device simultaneously.
+</p><p><a href="http://wiki.osdev.org/File:Command_list.jpg" class="image"><img alt="Command list.jpg" src="AHCI%20-%20OSDev%20Wiki_files/Command_list.jpg" height="586" width="819"></a>
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">typedef</span> <span class="kw4">struct</span> tagHBA_CMD_HEADER
+<span class="br0">{</span>
+	<span class="co1">// DW0</span>
+	BYTE	cfl<span class="sy0">:</span><span class="nu0">5</span><span class="sy0">;</span>		<span class="co1">// Command FIS length in DWORDS, 2 ~ 16</span>
+	BYTE	a<span class="sy0">:</span><span class="nu0">1</span><span class="sy0">;</span>		<span class="co1">// ATAPI</span>
+	BYTE	w<span class="sy0">:</span><span class="nu0">1</span><span class="sy0">;</span>		<span class="co1">// Write, 1: H2D, 0: D2H</span>
+	BYTE	p<span class="sy0">:</span><span class="nu0">1</span><span class="sy0">;</span>		<span class="co1">// Prefetchable</span>
+&nbsp;
+	BYTE	r<span class="sy0">:</span><span class="nu0">1</span><span class="sy0">;</span>		<span class="co1">// Reset</span>
+	BYTE	b<span class="sy0">:</span><span class="nu0">1</span><span class="sy0">;</span>		<span class="co1">// BIST</span>
+	BYTE	c<span class="sy0">:</span><span class="nu0">1</span><span class="sy0">;</span>		<span class="co1">// Clear busy upon R_OK</span>
+	BYTE	rsv0<span class="sy0">:</span><span class="nu0">1</span><span class="sy0">;</span>		<span class="co1">// Reserved</span>
+	BYTE	pmp<span class="sy0">:</span><span class="nu0">4</span><span class="sy0">;</span>		<span class="co1">// Port multiplier port</span>
+&nbsp;
+	WORD	prdtl<span class="sy0">;</span>		<span class="co1">// Physical region descriptor table length in entries</span>
+&nbsp;
+	<span class="co1">// DW1</span>
+	<span class="kw4">volatile</span>
+	DWORD	prdbc<span class="sy0">;</span>		<span class="co1">// Physical region descriptor byte count transferred</span>
+&nbsp;
+	<span class="co1">// DW2, 3</span>
+	DWORD	ctba<span class="sy0">;</span>		<span class="co1">// Command table descriptor base address</span>
+	DWORD	ctbau<span class="sy0">;</span>		<span class="co1">// Command table descriptor base address upper 32 bits</span>
+&nbsp;
+	<span class="co1">// DW4 - 7</span>
+	DWORD	rsv1<span class="br0">[</span><span class="nu0">4</span><span class="br0">]</span><span class="sy0">;</span>	<span class="co1">// Reserved</span>
+<span class="br0">}</span> HBA_CMD_HEADER<span class="sy0">;</span></pre></div></div>
+<p><b>5) Command Table and Physical Region Descriptor Table</b>
+</p><p>As described above, a command table contains an ATA command FIS, 
+an ATAPI command buffer and a bunch of PRDT (Physical Region Descriptor 
+Table) specifying the data payload address and size.
+</p><p>A command table may have 0 to 65535 PRDT entries. The actual PRDT
+ entries count is set in the command header (HBA_CMD_HEADER.prdtl). As 
+an example, if a host wants to read 100K bytes continuously from a disk,
+ the first half to memory address A1, and the second half to address A2.
+ It must set two PRDT entries, the first PRDT.DBA = A1, and the second 
+PRDT.DBA = A2.
+</p><p>An AHCI controller acts as a PCI bus master to transfer data payload directly between device and system memory.
+</p><p><a href="http://wiki.osdev.org/File:Command_table.jpg" class="image"><img alt="Command table.jpg" src="AHCI%20-%20OSDev%20Wiki_files/Command_table.jpg" height="683" width="780"></a>
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="kw4">typedef</span> <span class="kw4">struct</span> tagHBA_CMD_TBL
+<span class="br0">{</span>
+	<span class="co1">// 0x00</span>
+	BYTE	cfis<span class="br0">[</span><span class="nu0">64</span><span class="br0">]</span><span class="sy0">;</span>	<span class="co1">// Command FIS</span>
+&nbsp;
+	<span class="co1">// 0x40</span>
+	BYTE	acmd<span class="br0">[</span><span class="nu0">16</span><span class="br0">]</span><span class="sy0">;</span>	<span class="co1">// ATAPI command, 12 or 16 bytes</span>
+&nbsp;
+	<span class="co1">// 0x50</span>
+	BYTE	rsv<span class="br0">[</span><span class="nu0">48</span><span class="br0">]</span><span class="sy0">;</span>	<span class="co1">// Reserved</span>
+&nbsp;
+	<span class="co1">// 0x80</span>
+	HBA_PRDT_ENTRY	prdt_entry<span class="br0">[</span><span class="nu0">1</span><span class="br0">]</span><span class="sy0">;</span>	<span class="co1">// Physical region descriptor table entries, 0 ~ 65535</span>
+<span class="br0">}</span> HBA_CMD_TBL<span class="sy0">;</span>
+&nbsp;
+<span class="kw4">typedef</span> <span class="kw4">struct</span> tagHBA_PRDT_ENTRY
+<span class="br0">{</span>
+	DWORD	dba<span class="sy0">;</span>		<span class="co1">// Data base address</span>
+	DWORD	dbau<span class="sy0">;</span>		<span class="co1">// Data base address upper 32 bits</span>
+	DWORD	rsv0<span class="sy0">;</span>		<span class="co1">// Reserved</span>
+&nbsp;
+	<span class="co1">// DW3</span>
+	DWORD	dbc<span class="sy0">:</span><span class="nu0">22</span><span class="sy0">;</span>		<span class="co1">// Byte count, 4M max</span>
+	DWORD	rsv1<span class="sy0">:</span><span class="nu0">9</span><span class="sy0">;</span>		<span class="co1">// Reserved</span>
+	DWORD	i<span class="sy0">:</span><span class="nu0">1</span><span class="sy0">;</span>		<span class="co1">// Interrupt on completion</span>
+<span class="br0">}</span> HBA_PRDT_ENTRY<span class="sy0">;</span></pre></div></div>
+<h2> <span class="mw-headline" id="Detect_attached_SATA_devices"> Detect attached SATA devices </span></h2>
+<p><b>1) Which port is device attached</b>
+</p><p>As specified in the AHCI specification, firmware (BIOS) should 
+initialize the AHCI controller into a minimal workable state. OS usually
+ needn’t reinitialize it from the bottom. Much information is already 
+there when the OS boots.
+</p><p>The Port Implemented register (HBA_MEM.pi) is a 32 bit value and 
+each bit represents a port. If the bit is set, the according port has a 
+device attached, otherwise the port is free.
+</p><p><b>2) What kind of device is attached</b>
+</p><p>There are four kinds of SATA devices, and their signatures are 
+defined as below. The Port Signature register (HBA_PORT.sig) contains 
+the device signature, just read this register to find which kind of 
+device is attached at the port. Some buggy AHCI controllers may not set 
+the Signature register correctly. The most reliable way is to judge from
+ the Identify data read back from the device.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co2">#define	SATA_SIG_ATA	0x00000101	// SATA drive</span>
+<span class="co2">#define	SATA_SIG_ATAPI	0xEB140101	// SATAPI drive</span>
+<span class="co2">#define	SATA_SIG_SEMB	0xC33C0101	// Enclosure management bridge</span>
+<span class="co2">#define	SATA_SIG_PM	0x96690101	// Port multiplier</span>
+&nbsp;
+<span class="kw4">void</span> probe_port<span class="br0">(</span>HBA_MEM <span class="sy0">*</span>abar<span class="br0">)</span>
+<span class="br0">{</span>
+	<span class="co1">// Search disk in impelemented ports</span>
+	DWORD pi <span class="sy0">=</span> abar<span class="sy0">-&gt;</span>pi<span class="sy0">;</span>
+	<span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+	<span class="kw1">while</span> <span class="br0">(</span>i<span class="sy0">&lt;</span><span class="nu0">32</span><span class="br0">)</span>
+	<span class="br0">{</span>
+		<span class="kw1">if</span> <span class="br0">(</span>pi <span class="sy0">&amp;</span> <span class="nu0">1</span><span class="br0">)</span>
+		<span class="br0">{</span>
+			<span class="kw4">int</span> dt <span class="sy0">=</span> check_type<span class="br0">(</span><span class="sy0">&amp;</span>abar<span class="sy0">-&gt;</span>ports<span class="br0">[</span>i<span class="br0">]</span><span class="br0">)</span><span class="sy0">;</span>
+			<span class="kw1">if</span> <span class="br0">(</span>dt <span class="sy0">==</span> AHCI_DEV_SATA<span class="br0">)</span>
+			<span class="br0">{</span>
+				trace_ahci<span class="br0">(</span><span class="st0">"SATA drive found at port&nbsp;%d<span class="es1">\n</span>"</span><span class="sy0">,</span> i<span class="br0">)</span><span class="sy0">;</span>
+			<span class="br0">}</span>
+			<span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">(</span>dt <span class="sy0">==</span> AHCI_DEV_SATAPI<span class="br0">)</span>
+			<span class="br0">{</span>
+				trace_ahci<span class="br0">(</span><span class="st0">"SATAPI drive found at port&nbsp;%d<span class="es1">\n</span>"</span><span class="sy0">,</span> i<span class="br0">)</span><span class="sy0">;</span>
+			<span class="br0">}</span>
+			<span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">(</span>dt <span class="sy0">==</span> AHCI_DEV_SEMB<span class="br0">)</span>
+			<span class="br0">{</span>
+				trace_ahci<span class="br0">(</span><span class="st0">"SEMB drive found at port&nbsp;%d<span class="es1">\n</span>"</span><span class="sy0">,</span> i<span class="br0">)</span><span class="sy0">;</span>
+			<span class="br0">}</span>
+			<span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">(</span>dt <span class="sy0">==</span> AHCI_DEV_PM<span class="br0">)</span>
+			<span class="br0">{</span>
+				trace_ahci<span class="br0">(</span><span class="st0">"PM drive found at port&nbsp;%d<span class="es1">\n</span>"</span><span class="sy0">,</span> i<span class="br0">)</span><span class="sy0">;</span>
+			<span class="br0">}</span>
+			<span class="kw1">else</span>
+			<span class="br0">{</span>
+				trace_ahci<span class="br0">(</span><span class="st0">"No drive found at port&nbsp;%d<span class="es1">\n</span>"</span><span class="sy0">,</span> i<span class="br0">)</span><span class="sy0">;</span>
+			<span class="br0">}</span>
+		<span class="br0">}</span>
+&nbsp;
+		pi <span class="sy0">&gt;&gt;=</span> <span class="nu0">1</span><span class="sy0">;</span>
+		i <span class="sy0">++;</span>
+	<span class="br0">}</span>
+<span class="br0">}</span>
+&nbsp;
+<span class="co1">// Check device type</span>
+<span class="kw4">static</span> <span class="kw4">int</span> check_type<span class="br0">(</span>HBA_PORT <span class="sy0">*</span>port<span class="br0">)</span>
+<span class="br0">{</span>
+	DWORD ssts <span class="sy0">=</span> port<span class="sy0">-&gt;</span>ssts<span class="sy0">;</span>
+&nbsp;
+	BYTE ipm <span class="sy0">=</span> <span class="br0">(</span>ssts <span class="sy0">&gt;&gt;</span> <span class="nu0">8</span><span class="br0">)</span> <span class="sy0">&amp;</span> <span class="nu12">0x0F</span><span class="sy0">;</span>
+	BYTE det <span class="sy0">=</span> ssts <span class="sy0">&amp;</span> <span class="nu12">0x0F</span><span class="sy0">;</span>
+&nbsp;
+	<span class="kw1">if</span> <span class="br0">(</span>det <span class="sy0">!=</span> HBA_PORT_DET_PRESENT<span class="br0">)</span>	<span class="co1">// Check drive status</span>
+		<span class="kw1">return</span> AHCI_DEV_NULL<span class="sy0">;</span>
+	<span class="kw1">if</span> <span class="br0">(</span>ipm <span class="sy0">!=</span> HBA_PORT_IPM_ACTIVE<span class="br0">)</span>
+		<span class="kw1">return</span> AHCI_DEV_NULL<span class="sy0">;</span>
+&nbsp;
+	<span class="kw1">switch</span> <span class="br0">(</span>port<span class="sy0">-&gt;</span>sig<span class="br0">)</span>
+	<span class="br0">{</span>
+	<span class="kw1">case</span> SATA_SIG_ATAPI<span class="sy0">:</span>
+		<span class="kw1">return</span> AHCI_DEV_SATAPI<span class="sy0">;</span>
+	<span class="kw1">case</span> SATA_SIG_SEMB<span class="sy0">:</span>
+		<span class="kw1">return</span> AHCI_DEV_SEMB<span class="sy0">;</span>
+	<span class="kw1">case</span> SATA_SIG_PM<span class="sy0">:</span>
+		<span class="kw1">return</span> AHCI_DEV_PM<span class="sy0">;</span>
+	<span class="kw1">default</span><span class="sy0">:</span>
+		<span class="kw1">return</span> AHCI_DEV_SATA<span class="sy0">;</span>
+	<span class="br0">}</span>
+<span class="br0">}</span></pre></div></div>
+<h2> <span class="mw-headline" id="AHCI_port_memory_space_initialization"> AHCI port memory space initialization </span></h2>
+<p>BIOS may have already configured all the necessary AHCI memory 
+spaces. But the OS usually needs to reconfigure them to make them fit 
+its requirements. It should be noted that Command List must be located 
+at 1K aligned memory address and Received FIS be 256 bytes aligned.
+</p><p>Before rebasing Port memory space, OS must wait for current 
+pending commands to finish and tell HBA to stop receiving FIS from the 
+port. Otherwise an accidently incoming FIS may be written into a 
+partially configured memory area. This is done by checking and setting 
+corresponding bits at the Port Command And Status register 
+(HBA_PORT.cmd). The example subroutines stop_cmd() and start_cmd() do 
+the job.
+</p><p>The following example assumes that the HBA has 32 ports 
+implemented and each port contains 32 command slots, and will allocate 8
+ PRDTs for each command slot.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co2">#define	AHCI_BASE	0x400000	// 4M</span>
+&nbsp;
+<span class="kw4">void</span> port_rebase<span class="br0">(</span>HBA_PORT <span class="sy0">*</span>port<span class="sy0">,</span> <span class="kw4">int</span> portno<span class="br0">)</span>
+<span class="br0">{</span>
+	stop_cmd<span class="br0">(</span>port<span class="br0">)</span><span class="sy0">;</span>	<span class="co1">// Stop command engine</span>
+&nbsp;
+	<span class="co1">// Command list offset: 1K*portno</span>
+	<span class="co1">// Command list entry size = 32</span>
+	<span class="co1">// Command list entry maxim count = 32</span>
+	<span class="co1">// Command list maxim size = 32*32 = 1K per port</span>
+	port<span class="sy0">-&gt;</span>clb <span class="sy0">=</span> AHCI_BASE <span class="sy0">+</span> <span class="br0">(</span>portno<span class="sy0">&lt;&lt;</span><span class="nu0">10</span><span class="br0">)</span><span class="sy0">;</span>
+	port<span class="sy0">-&gt;</span>clbu <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+	<span class="kw3">memset</span><span class="br0">(</span><span class="br0">(</span><span class="kw4">void</span><span class="sy0">*</span><span class="br0">)</span><span class="br0">(</span>port<span class="sy0">-&gt;</span>clb<span class="br0">)</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">1024</span><span class="br0">)</span><span class="sy0">;</span>
+&nbsp;
+	<span class="co1">// FIS offset: 32K+256*portno</span>
+	<span class="co1">// FIS entry size = 256 bytes per port</span>
+	port<span class="sy0">-&gt;</span>fb <span class="sy0">=</span> AHCI_BASE <span class="sy0">+</span> <span class="br0">(</span><span class="nu0">32</span><span class="sy0">&lt;&lt;</span><span class="nu0">10</span><span class="br0">)</span> <span class="sy0">+</span> <span class="br0">(</span>portno<span class="sy0">&lt;&lt;</span><span class="nu0">8</span><span class="br0">)</span><span class="sy0">;</span>
+	port<span class="sy0">-&gt;</span>fbu <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+	<span class="kw3">memset</span><span class="br0">(</span><span class="br0">(</span><span class="kw4">void</span><span class="sy0">*</span><span class="br0">)</span><span class="br0">(</span>port<span class="sy0">-&gt;</span>fb<span class="br0">)</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">256</span><span class="br0">)</span><span class="sy0">;</span>
+&nbsp;
+	<span class="co1">// Command table offset: 40K + 8K*portno</span>
+	<span class="co1">// Command table size = 256*32 = 8K per port</span>
+	HBA_CMD_HEADER <span class="sy0">*</span>cmdheader <span class="sy0">=</span> <span class="br0">(</span>HBA_CMD_HEADER<span class="sy0">*</span><span class="br0">)</span><span class="br0">(</span>port<span class="sy0">-&gt;</span>clb<span class="br0">)</span><span class="sy0">;</span>
+	<span class="kw1">for</span> <span class="br0">(</span><span class="kw4">int</span> i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> i<span class="sy0">&lt;</span><span class="nu0">32</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">)</span>
+	<span class="br0">{</span>
+		cmdheader<span class="br0">[</span>i<span class="br0">]</span>.<span class="me1">prdtl</span> <span class="sy0">=</span> <span class="nu0">8</span><span class="sy0">;</span>	<span class="co1">// 8 prdt entries per command table</span>
+					<span class="co1">// 256 bytes per command table, 64+16+48+16*8</span>
+		<span class="co1">// Command table offset: 40K + 8K*portno + cmdheader_index*256</span>
+		cmdheader<span class="br0">[</span>i<span class="br0">]</span>.<span class="me1">ctba</span> <span class="sy0">=</span> AHCI_BASE <span class="sy0">+</span> <span class="br0">(</span><span class="nu0">40</span><span class="sy0">&lt;&lt;</span><span class="nu0">10</span><span class="br0">)</span> <span class="sy0">+</span> <span class="br0">(</span>portno<span class="sy0">&lt;&lt;</span><span class="nu0">13</span><span class="br0">)</span> <span class="sy0">+</span> <span class="br0">(</span>i<span class="sy0">&lt;&lt;</span><span class="nu0">8</span><span class="br0">)</span><span class="sy0">;</span>
+		cmdheader<span class="br0">[</span>i<span class="br0">]</span>.<span class="me1">ctbau</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+		<span class="kw3">memset</span><span class="br0">(</span><span class="br0">(</span><span class="kw4">void</span><span class="sy0">*</span><span class="br0">)</span>cmdheader<span class="br0">[</span>i<span class="br0">]</span>.<span class="me1">ctba</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">256</span><span class="br0">)</span><span class="sy0">;</span>
+	<span class="br0">}</span>
+&nbsp;
+	start_cmd<span class="br0">(</span>port<span class="br0">)</span><span class="sy0">;</span>	<span class="co1">// Start command engine</span>
+<span class="br0">}</span>
+&nbsp;
+<span class="co1">// Start command engine</span>
+<span class="kw4">void</span> start_cmd<span class="br0">(</span>HBA_PORT <span class="sy0">*</span>port<span class="br0">)</span>
+<span class="br0">{</span>
+	<span class="co1">// Wait until CR (bit15) is cleared</span>
+	<span class="kw1">while</span> <span class="br0">(</span>port<span class="sy0">-&gt;</span>cmd <span class="sy0">&amp;</span> HBA_PxCMD_CR<span class="br0">)</span><span class="sy0">;</span>
+&nbsp;
+	<span class="co1">// Set FRE (bit4) and ST (bit0)</span>
+	port<span class="sy0">-&gt;</span>cmd <span class="sy0">|=</span> HBA_PxCMD_FRE<span class="sy0">;</span>
+	port<span class="sy0">-&gt;</span>cmd <span class="sy0">|=</span> HBA_PxCMD_ST<span class="sy0">;</span> 
+<span class="br0">}</span>
+&nbsp;
+<span class="co1">// Stop command engine</span>
+<span class="kw4">void</span> stop_cmd<span class="br0">(</span>HBA_PORT <span class="sy0">*</span>port<span class="br0">)</span>
+<span class="br0">{</span>
+	<span class="co1">// Clear ST (bit0)</span>
+	port<span class="sy0">-&gt;</span>cmd <span class="sy0">&amp;=</span> ~HBA_PxCMD_ST<span class="sy0">;</span>
+&nbsp;
+	<span class="co1">// Wait until FR (bit14), CR (bit15) are cleared</span>
+	<span class="kw1">while</span><span class="br0">(</span><span class="nu0">1</span><span class="br0">)</span>
+	<span class="br0">{</span>
+		<span class="kw1">if</span> <span class="br0">(</span>port<span class="sy0">-&gt;</span>cmd <span class="sy0">&amp;</span> HBA_PxCMD_FR<span class="br0">)</span>
+			<span class="kw1">continue</span><span class="sy0">;</span>
+		<span class="kw1">if</span> <span class="br0">(</span>port<span class="sy0">-&gt;</span>cmd <span class="sy0">&amp;</span> HBA_PxCMD_CR<span class="br0">)</span>
+			<span class="kw1">continue</span><span class="sy0">;</span>
+		<span class="kw2">break</span><span class="sy0">;</span>
+	<span class="br0">}</span>
+&nbsp;
+	<span class="co1">// Clear FRE (bit4)</span>
+	port<span class="sy0">-&gt;</span>cmd <span class="sy0">&amp;=</span> ~HBA_PxCMD_FRE<span class="sy0">;</span>
+<span class="br0">}</span></pre></div></div>
+<h2> <span class="mw-headline" id="AHCI_.26_ATAPI"> AHCI &amp; ATAPI </span></h2>
+<p>The documentation regarding using the AHCI interface to access an 
+ATAPI device (most likely an optical drive) is rather poorly explained 
+in the specification. However, once you understand that the HBA does 
+most of the work for you it is rather simple. The AHCI/ATAPI method 
+works by issuing the ATA PACKET command (0xA0) instead of the READ (READ
+ is shown in the example below) and populating the ACMD field of the 
+HBA_CMD_TBL with the 12/16 byte ATAPI command and setting the 'a' field 
+to 1 in the HBA_CMD_HEADER which tells the HBA to perform the multi-step
+ process (all done automatically) of transmitting the PACKET command, 
+then sending the ATAPI device the ACMD.
+</p>
+<h2> <span class="mw-headline" id="Example_-_Read_hard_disk_sectors"> Example - Read hard disk sectors </span></h2>
+<p>The code example shows how to read "count" sectors from sector offset
+ "starth:startl" to "buf" with LBA48 mode from HBA "port". Every PRDT 
+entry contains 8K bytes data payload at most.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="c source-c"><pre class="de1"><span class="co2">#define ATA_DEV_BUSY 0x80</span>
+<span class="co2">#define ATA_DEV_DRQ 0x08</span>
+&nbsp;
+BOOL read<span class="br0">(</span>HBA_PORT <span class="sy0">*</span>port<span class="sy0">,</span> DWORD startl<span class="sy0">,</span> DWORD starth<span class="sy0">,</span> DWORD count<span class="sy0">,</span> WORD <span class="sy0">*</span>buf<span class="br0">)</span>
+<span class="br0">{</span>
+	port<span class="sy0">-&gt;</span>is <span class="sy0">=</span> <span class="br0">(</span>DWORD<span class="br0">)</span><span class="sy0">-</span><span class="nu0">1</span><span class="sy0">;</span>		<span class="co1">// Clear pending interrupt bits</span>
+	<span class="kw4">int</span> spin <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> <span class="co1">// Spin lock timeout counter</span>
+	<span class="kw4">int</span> slot <span class="sy0">=</span> find_cmdslot<span class="br0">(</span>port<span class="br0">)</span><span class="sy0">;</span>
+	<span class="kw1">if</span> <span class="br0">(</span>slot <span class="sy0">==</span> <span class="sy0">-</span><span class="nu0">1</span><span class="br0">)</span>
+		<span class="kw1">return</span> FALSE<span class="sy0">;</span>
+&nbsp;
+	HBA_CMD_HEADER <span class="sy0">*</span>cmdheader <span class="sy0">=</span> <span class="br0">(</span>HBA_CMD_HEADER<span class="sy0">*</span><span class="br0">)</span>port<span class="sy0">-&gt;</span>clb<span class="sy0">;</span>
+	cmdheader <span class="sy0">+=</span> slot<span class="sy0">;</span>
+	cmdheader<span class="sy0">-&gt;</span>cfl <span class="sy0">=</span> <span class="kw4">sizeof</span><span class="br0">(</span>FIS_REG_H2D<span class="br0">)</span><span class="sy0">/</span><span class="kw4">sizeof</span><span class="br0">(</span>DWORD<span class="br0">)</span><span class="sy0">;</span>	<span class="co1">// Command FIS size</span>
+	cmdheader<span class="sy0">-&gt;</span>w <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>		<span class="co1">// Read from device</span>
+	cmdheader<span class="sy0">-&gt;</span>prdtl <span class="sy0">=</span> <span class="br0">(</span>WORD<span class="br0">)</span><span class="br0">(</span><span class="br0">(</span>count<span class="sy0">-</span><span class="nu0">1</span><span class="br0">)</span><span class="sy0">&gt;&gt;</span><span class="nu0">4</span><span class="br0">)</span> <span class="sy0">+</span> <span class="nu0">1</span><span class="sy0">;</span>	<span class="co1">// PRDT entries count</span>
+&nbsp;
+	HBA_CMD_TBL <span class="sy0">*</span>cmdtbl <span class="sy0">=</span> <span class="br0">(</span>HBA_CMD_TBL<span class="sy0">*</span><span class="br0">)</span><span class="br0">(</span>cmdheader<span class="sy0">-&gt;</span>ctba<span class="br0">)</span><span class="sy0">;</span>
+	<span class="kw3">memset</span><span class="br0">(</span>cmdtbl<span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="kw4">sizeof</span><span class="br0">(</span>HBA_CMD_TBL<span class="br0">)</span> <span class="sy0">+</span>
+ 		<span class="br0">(</span>cmdheader<span class="sy0">-&gt;</span>prdtl<span class="sy0">-</span><span class="nu0">1</span><span class="br0">)</span><span class="sy0">*</span><span class="kw4">sizeof</span><span class="br0">(</span>HBA_PRDT_ENTRY<span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span>
+&nbsp;
+	<span class="co1">// 8K bytes (16 sectors) per PRDT</span>
+	<span class="kw1">for</span> <span class="br0">(</span><span class="kw4">int</span> i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> i<span class="sy0">&lt;</span>cmdheader<span class="sy0">-&gt;</span>prdtl<span class="sy0">-</span><span class="nu0">1</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">)</span>
+	<span class="br0">{</span>
+		cmdtbl<span class="sy0">-&gt;</span>prdt_entry<span class="br0">[</span>i<span class="br0">]</span>.<span class="me1">dba</span> <span class="sy0">=</span> <span class="br0">(</span>DWORD<span class="br0">)</span>buf<span class="sy0">;</span>
+		cmdtbl<span class="sy0">-&gt;</span>prdt_entry<span class="br0">[</span>i<span class="br0">]</span>.<span class="me1">dbc</span> <span class="sy0">=</span> <span class="nu0">8</span><span class="sy0">*</span><span class="nu0">1024</span><span class="sy0">;</span>	<span class="co1">// 8K bytes</span>
+		cmdtbl<span class="sy0">-&gt;</span>prdt_entry<span class="br0">[</span>i<span class="br0">]</span>.<span class="me1">i</span> <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+		buf <span class="sy0">+=</span> <span class="nu0">4</span><span class="sy0">*</span><span class="nu0">1024</span><span class="sy0">;</span>	<span class="co1">// 4K words</span>
+		count <span class="sy0">-=</span> <span class="nu0">16</span><span class="sy0">;</span>	<span class="co1">// 16 sectors</span>
+	<span class="br0">}</span>
+	<span class="co1">// Last entry</span>
+	cmdtbl<span class="sy0">-&gt;</span>prdt_entry<span class="br0">[</span>i<span class="br0">]</span>.<span class="me1">dba</span> <span class="sy0">=</span> <span class="br0">(</span>DWORD<span class="br0">)</span>buf<span class="sy0">;</span>
+	cmdtbl<span class="sy0">-&gt;</span>prdt_entry<span class="br0">[</span>i<span class="br0">]</span>.<span class="me1">dbc</span> <span class="sy0">=</span> count<span class="sy0">&lt;&lt;</span><span class="nu0">9</span><span class="sy0">;</span>	<span class="co1">// 512 bytes per sector</span>
+	cmdtbl<span class="sy0">-&gt;</span>prdt_entry<span class="br0">[</span>i<span class="br0">]</span>.<span class="me1">i</span> <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+&nbsp;
+	<span class="co1">// Setup command</span>
+	FIS_REG_H2D <span class="sy0">*</span>cmdfis <span class="sy0">=</span> <span class="br0">(</span>FIS_REG_H2D<span class="sy0">*</span><span class="br0">)</span><span class="br0">(</span><span class="sy0">&amp;</span>cmdtbl<span class="sy0">-&gt;</span>cfis<span class="br0">)</span><span class="sy0">;</span>
+&nbsp;
+	cmdfis<span class="sy0">-&gt;</span>fis_type <span class="sy0">=</span> FIS_TYPE_REG_H2D<span class="sy0">;</span>
+	cmdfis<span class="sy0">-&gt;</span>c <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>	<span class="co1">// Command</span>
+	cmdfis<span class="sy0">-&gt;</span>command <span class="sy0">=</span> ATA_CMD_READ_DMA_EX<span class="sy0">;</span>
+&nbsp;
+	cmdfis<span class="sy0">-&gt;</span>lba0 <span class="sy0">=</span> <span class="br0">(</span>BYTE<span class="br0">)</span>startl<span class="sy0">;</span>
+	cmdfis<span class="sy0">-&gt;</span>lba1 <span class="sy0">=</span> <span class="br0">(</span>BYTE<span class="br0">)</span><span class="br0">(</span>startl<span class="sy0">&gt;&gt;</span><span class="nu0">8</span><span class="br0">)</span><span class="sy0">;</span>
+	cmdfis<span class="sy0">-&gt;</span>lba2 <span class="sy0">=</span> <span class="br0">(</span>BYTE<span class="br0">)</span><span class="br0">(</span>startl<span class="sy0">&gt;&gt;</span><span class="nu0">16</span><span class="br0">)</span><span class="sy0">;</span>
+	cmdfis<span class="sy0">-&gt;</span>device <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">&lt;&lt;</span><span class="nu0">6</span><span class="sy0">;</span>	<span class="co1">// LBA mode</span>
+&nbsp;
+	cmdfis<span class="sy0">-&gt;</span>lba3 <span class="sy0">=</span> <span class="br0">(</span>BYTE<span class="br0">)</span><span class="br0">(</span>startl<span class="sy0">&gt;&gt;</span><span class="nu0">24</span><span class="br0">)</span><span class="sy0">;</span>
+	cmdfis<span class="sy0">-&gt;</span>lba4 <span class="sy0">=</span> <span class="br0">(</span>BYTE<span class="br0">)</span>starth<span class="sy0">;</span>
+	cmdfis<span class="sy0">-&gt;</span>lba5 <span class="sy0">=</span> <span class="br0">(</span>BYTE<span class="br0">)</span><span class="br0">(</span>starth<span class="sy0">&gt;&gt;</span><span class="nu0">8</span><span class="br0">)</span><span class="sy0">;</span>
+&nbsp;
+	cmdfis<span class="sy0">-&gt;</span>countl <span class="sy0">=</span> LOBYTE<span class="br0">(</span>count<span class="br0">)</span><span class="sy0">;</span>
+	cmdfis<span class="sy0">-&gt;</span>counth <span class="sy0">=</span> HIBYTE<span class="br0">(</span>count<span class="br0">)</span><span class="sy0">;</span>
+&nbsp;
+	<span class="co1">// The below loop waits until the port is no longer busy before issuing a new command</span>
+	<span class="kw1">while</span> <span class="br0">(</span><span class="br0">(</span>port<span class="sy0">-&gt;</span>tfd <span class="sy0">&amp;</span> <span class="br0">(</span>ATA_DEV_BUSY <span class="sy0">|</span> ATA_DEV_DRQ<span class="br0">)</span><span class="br0">)</span> <span class="sy0">&amp;&amp;</span> spin <span class="sy0">&lt;</span> <span class="nu0">1000000</span><span class="br0">)</span>
+	<span class="br0">{</span>
+		spin<span class="sy0">++;</span>
+	<span class="br0">}</span>
+	<span class="kw1">if</span> <span class="br0">(</span>spin <span class="sy0">==</span> <span class="nu0">1000000</span><span class="br0">)</span>
+	<span class="br0">{</span>
+		trace_ahci<span class="br0">(</span><span class="st0">"Port is hung<span class="es1">\n</span>"</span><span class="br0">)</span><span class="sy0">;</span>
+		<span class="kw1">return</span> FALSE<span class="sy0">;</span>
+	<span class="br0">}</span>
+&nbsp;
+	port<span class="sy0">-&gt;</span>ci <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">&lt;&lt;</span>slot<span class="sy0">;</span>	<span class="co1">// Issue command</span>
+&nbsp;
+	<span class="co1">// Wait for completion</span>
+	<span class="kw1">while</span> <span class="br0">(</span><span class="nu0">1</span><span class="br0">)</span>
+	<span class="br0">{</span>
+		<span class="co1">// In some longer duration reads, it may be helpful to spin on the DPS bit </span>
+		<span class="co1">// in the PxIS port field as well (1 &lt;&lt; 5)</span>
+		<span class="kw1">if</span> <span class="br0">(</span><span class="br0">(</span>port<span class="sy0">-&gt;</span>ci <span class="sy0">&amp;</span> <span class="br0">(</span><span class="nu0">1</span><span class="sy0">&lt;&lt;</span>slot<span class="br0">)</span><span class="br0">)</span> <span class="sy0">==</span> <span class="nu0">0</span><span class="br0">)</span> 
+			<span class="kw2">break</span><span class="sy0">;</span>
+		<span class="kw1">if</span> <span class="br0">(</span>port<span class="sy0">-&gt;</span>is <span class="sy0">&amp;</span> HBA_PxIS_TFES<span class="br0">)</span>	<span class="co1">// Task file error</span>
+		<span class="br0">{</span>
+			trace_ahci<span class="br0">(</span><span class="st0">"Read disk error<span class="es1">\n</span>"</span><span class="br0">)</span><span class="sy0">;</span>
+			<span class="kw1">return</span> FALSE<span class="sy0">;</span>
+		<span class="br0">}</span>
+	<span class="br0">}</span>
+&nbsp;
+	<span class="co1">// Check again</span>
+	<span class="kw1">if</span> <span class="br0">(</span>port<span class="sy0">-&gt;</span>is <span class="sy0">&amp;</span> HBA_PxIS_TFES<span class="br0">)</span>
+	<span class="br0">{</span>
+		trace_ahci<span class="br0">(</span><span class="st0">"Read disk error<span class="es1">\n</span>"</span><span class="br0">)</span><span class="sy0">;</span>
+		<span class="kw1">return</span> FALSE<span class="sy0">;</span>
+	<span class="br0">}</span>
+&nbsp;
+	<span class="kw1">return</span> TRUE<span class="sy0">;</span>
+<span class="br0">}</span>
+&nbsp;
+<span class="co1">// Find a free command list slot</span>
+<span class="kw4">int</span> find_cmdslot<span class="br0">(</span>HBA_PORT <span class="sy0">*</span>port<span class="br0">)</span>
+<span class="br0">{</span>
+	<span class="co1">// If not set in SACT and CI, the slot is free</span>
+	DWORD slots <span class="sy0">=</span> <span class="br0">(</span>m_port<span class="sy0">-&gt;</span>sact <span class="sy0">|</span> m_port<span class="sy0">-&gt;</span>ci<span class="br0">)</span><span class="sy0">;</span>
+	<span class="kw1">for</span> <span class="br0">(</span><span class="kw4">int</span> i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> i<span class="sy0">&lt;</span>cmdslots<span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">)</span>
+	<span class="br0">{</span>
+		<span class="kw1">if</span> <span class="br0">(</span><span class="br0">(</span>slots<span class="sy0">&amp;</span><span class="nu0">1</span><span class="br0">)</span> <span class="sy0">==</span> <span class="nu0">0</span><span class="br0">)</span>
+			<span class="kw1">return</span> i<span class="sy0">;</span>
+		slots <span class="sy0">&gt;&gt;=</span> <span class="nu0">1</span><span class="sy0">;</span>
+	<span class="br0">}</span>
+	trace_ahci<span class="br0">(</span><span class="st0">"Cannot find free command list entry<span class="es1">\n</span>"</span><span class="br0">)</span><span class="sy0">;</span>
+	<span class="kw1">return</span> <span class="sy0">-</span><span class="nu0">1</span><span class="sy0">;</span>
+<span class="br0">}</span></pre></div></div>
+<h2> <span class="mw-headline" id="External_Links"> External Links </span></h2>
+<ul><li><a rel="nofollow" class="external text" href="http://www.intel.com/technology/serialata/ahci.htm">Serial ATA Advance Host Controller Interface (AHCI) 1.3</a>
+</li><li><a rel="nofollow" class="external text" href="http://www.sata-io.org/">Serial ATA Revision 3.0</a>
+</li><li><a rel="nofollow" class="external text" href="http://www.t13.org/">ATA8-ACS, ATA8-AAM</a>
+</li><li><a rel="nofollow" class="external text" href="https://github.com/haiku/haiku/tree/master/src/add-ons/kernel/busses/scsi/ahci">Haiku's AHCI implementation</a>
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 186/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2674-0!*!*!!en!2!* and timestamp 20160226134632 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.osdev.org/index.php?title=AHCI&amp;oldid=15760">http://wiki.osdev.org/index.php?title=AHCI&amp;oldid=15760</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id="catlinks" class="catlinks"><div id="mw-normal-catlinks"><a href="http://wiki.osdev.org/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="http://wiki.osdev.org/Category:ATA" title="Category:ATA">ATA</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=AHCI" title="You are encouraged to log in; however, it is not mandatory [alt-shift-o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li id="ca-nstab-main" class="selected"><span><a href="http://wiki.osdev.org/AHCI" title="View the content page [alt-shift-c]" accesskey="c">Page</a></span></li>
+					<li id="ca-talk"><span><a href="http://wiki.osdev.org/Talk:AHCI" title="Discussion about the content page [alt-shift-t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="http://wiki.osdev.org/AHCI">Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.osdev.org/index.php?title=AHCI&amp;action=edit" title="This page is protected.
+You can view its source [alt-shift-e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.osdev.org/index.php?title=AHCI&amp;action=history" title="Past revisions of this page [alt-shift-h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="/index.php" id="searchform">
+		<input name="title" value="Special:Search" type="hidden">
+				<input name="search" title="Search OSDev Wiki [alt-shift-f]" accesskey="f" id="searchInput" type="search">		<input name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" type="submit">		<input name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" type="submit">			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/skins/common/images/osdev.png);" href="http://wiki.osdev.org/Main_Page" title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id="p-navigation">
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="http://wiki.osdev.org/Main_Page" title="Visit the main page [alt-shift-z]" accesskey="z">Main Page</a></li>
+			<li id="n-portal"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things">Forums</a></li>
+			<li id="n-FAQ"><a href="http://wiki.osdev.org/Category:FAQ">FAQ</a></li>
+			<li id="n-OS-Projects"><a href="http://wiki.osdev.org/Projects">OS Projects</a></li>
+			<li id="n-randompage"><a href="http://wiki.osdev.org/Special:Random" title="Load a random page [alt-shift-x]" accesskey="x">Random page</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- about -->
+<div class="portal" id="p-about">
+	<h5>About</h5>
+	<div class="body">
+		<ul>
+			<li id="n-This-site"><a href="http://wiki.osdev.org/OSDevWiki:About">This site</a></li>
+			<li id="n-Joining"><a href="http://wiki.osdev.org/OSDevWiki:Joining">Joining</a></li>
+			<li id="n-Editing-help"><a href="http://wiki.osdev.org/OSDevWiki:Editing">Editing help</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [alt-shift-r]" accesskey="r">Recent changes</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /about -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id="p-tb">
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.osdev.org/Special:WhatLinksHere/AHCI" title="A list of all wiki pages that link here [alt-shift-j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.osdev.org/Special:RecentChangesLinked/AHCI" title="Recent changes in pages linked from this page [alt-shift-k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [alt-shift-q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.osdev.org/index.php?title=AHCI&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.osdev.org/index.php?title=AHCI&amp;oldid=15760" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 20 March 2014, at 17:09.</li>
+											<li id="footer-info-viewcount">This page has been accessed 83,704 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="http://wiki.osdev.org/OSDev_Wiki:Privacy_policy" title="OSDev Wiki:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="http://wiki.osdev.org/OSDev_Wiki:About" title="OSDev Wiki:About">About OSDev Wiki</a></li>
+											<li id="footer-places-disclaimer"><a href="http://wiki.osdev.org/OSDev_Wiki:General_disclaimer" title="OSDev Wiki:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="AHCI%20-%20OSDev%20Wiki_files/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" height="31" width="88"></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="AHCI%20-%20OSDev%20Wiki_files/load_006.php"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script><script type="text/javascript" src="AHCI%20-%20OSDev%20Wiki_files/load_003.php"></script>
+<script src="AHCI%20-%20OSDev%20Wiki_files/load_005.php"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.037 secs. -->
+	
+
+</body></html>

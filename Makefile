@@ -1,11 +1,11 @@
 # a Makefile devmem.c
 
 
-EXE=ahci
+EXE=ahci_tst
 CC=gcc
 CFLAGS=-c -g
 LDFLAGS=
-SRC=$(EXE).c
+SRC=$(EXE).c ahci.c
 OBJ=$(SRC:.c=.o)
 
 all: $(SRC) $(EXE)
@@ -17,4 +17,4 @@ $(EXE): $(OBJ)
 	$(CC) $(CFLAGS) $< -o $@
 
 clean:
-	rm -f $(EXE) $(EXE).o
+	rm -f $(EXE) *.o

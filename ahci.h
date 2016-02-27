@@ -3,8 +3,16 @@
 #include <string.h>
 #include <stdint.h>
 
-#define ATA_DEV_BUSY 0x80
-#define ATA_DEV_DRQ 0x08
+
+#ifdef DEBUG_AHCI
+#define trace_ahci(f) \
+    do{\
+        printf(f);
+    }while(0)
+#else
+#define trace_ahci(f) do{}while(0)
+#endif
+
 
 #define ATA_DEV_BUSY 0x80
 #define ATA_DEV_DRQ 0x08
@@ -33,10 +41,13 @@
 #define HBA_PxCMD_SUD           (1 <<  1) /* SUD - Spin-Up Device */
 #define HBA_PxCMD_ST            (1 <<  0) /* ST - Start (command processing) */
 
-#define ATA_DEV_BUSY 0x80
-#define ATA_DEV_DRQ 0x08
+#define LOBYTE(w)  ((w)&0xFF)
+#define HIBYTE(w)  (((w) >> 8)&0xFF)
 
-#define AHCI_KERN_BASE 0xFFFFFFFF80000000
+#define ATA_CMD_READ_DMA 0xC8
+#define ATA_CMD_READ_DMA_EX 0x25
+#define ATA_CMD_WRITE_DMA 0xCA
+#define ATA_CMD_WRITE_DMA_EX 0x35
 
 typedef uint8_t BYTE;
 typedef uint16_t WORD;
@@ -53,6 +64,12 @@ typedef enum
     FIS_TYPE_PIO_SETUP  = 0x5F, // PIO setup FIS - device to host
     FIS_TYPE_DEV_BITS   = 0xA1, // Set device bits FIS - device to host
 } FIS_TYPE;
+
+typedef enum {
+    FALSE = -1,
+    TRUE = 0,
+}BOOL;
+
 
 typedef struct tagFIS_REG_H2D
 {
@@ -284,7 +301,6 @@ typedef struct tagHBA_CMD_HEADER
     DWORD   rsv1[4];    // Reserved
 } HBA_CMD_HEADER;
 
-void probe_port(HBA_MEM *abar);
 
 typedef struct tagHBA_PRDT_ENTRY
 {
@@ -314,17 +330,6 @@ typedef struct tagHBA_CMD_TBL
     HBA_PRDT_ENTRY  prdt_entry[1];  // Physical region descriptor table entries, 0 ~ 65535
 } HBA_CMD_TBL;
 
-
-
-extern HBA_MEM *abar;
-extern uint64_t *pages_for_ahci_start;
-extern uint64_t *pages_for_ahci_end;
-extern uint64_t *pages_for_ahci_start_virtual;
-extern uint64_t *pages_for_ahci_end_virtual;
-
-extern void mem_map_ahci(uint64_t abar_tmp);
-extern int read(HBA_PORT *port, DWORD startl, DWORD starth, DWORD count, QWORD buf);
-
-void init_ahci();
-char fs_buf[1024];
-
+extern BOOL write(HBA_PORT *port, DWORD startl, DWORD starth, DWORD count, WORD *buf);
+extern BOOL read(HBA_PORT *port, DWORD startl, DWORD starth, DWORD count, WORD *buf);
+extern void init_ahci(char *ahci_base);
